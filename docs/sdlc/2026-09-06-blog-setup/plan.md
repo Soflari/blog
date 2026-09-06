@@ -34,14 +34,8 @@
 - [x] 7. 自测全部通过：strict 构建 EXIT=0 零警告；serve 后首页/博客/两篇文章/归档/分类页均 200；`find site -path '*sdlc*' | wc -l` = 0；浏览器整页截图经视觉核验：界面全中文、MathJax 行内与块级公式均正确渲染（$e^{i\pi}+1=0$ 与 argmin 求和公式）、无排版问题
 - [x] 8. 全部站点源码与工作流已 commit `b8d855b`（10 文件 394 行），工作树干净
 - [x] 9. 独立复核 PASS（2026-09-06，全新只读子代理）：文件清单/关键配置/CI/git 状态 4 大项全过，验证命令亲跑贴输出均符合预期。其「avatar.png 不存在」的观察经查为误报（文件存在且被跟踪）
-- [ ] 10. 部署门（唯一需另行授权环节）。执行环境偏差：本机未装 `gh` CLI，原计划中 gh 命令不可用，改用等价路径：
-  1. 已确认 GitHub 身份：用户名 `Soflari`（SSH 认证实测通过，密钥与代理配置在 `~/.ssh/config`）；已核查其名下无 `blog`、无 `soflari.github.io` 仓库，两名字可用
-  2. 与用户确认仓库名与建仓方式（网页建仓或本机凭据 API 建仓）→ 修正 `site_url` 并 commit
-  3. 授权后加 SSH remote 推送 `main`
-  4. 等待 Actions：轮询 `git ls-remote --heads origin gh-pages`（非空即分支已生成）+ 公开 API `api.github.com/repos/Soflari/<repo>/actions/runs` 看结论
-  5. 开通 Pages 指向 `gh-pages` 分支（gh 不可用：用户网页 Settings→Pages 操作，或经授权用本机凭据调 REST API POST）
-  6. curl Pages 地址确认 200（非 200 等 30-60 秒重试）
-- [ ] 11. 收尾：完成标记与复核结论更新 commit；`C:\Users\Lenovo\.sdlc\log.md` 追加一行；向用户提示事后抽查方式
+- [x] 10. 部署门已完成（2026-09-06，用户经选择题明确授权：仓库名 `blog`、全代办方式）。执行记录：用户名 `Soflari`（SSH 实测通过）；`site_url` 改为 `https://soflari.github.io/blog/` 并 commit `b95157e`；用本机已存凭据调 REST API 建公开仓库（201）→ SSH 推送 `main` → Actions 结论 success、`gh-pages` 分支生成（约 20 秒）→ API POST 开通 Pages 指向 `gh-pages`（201）→ 公网验证：`/blog/` 首次 404 系传播延迟，10 秒后 200；首页/博客列表/两篇文章均 200，标题「我的博客」。偏差备注：gh CLI 未安装，gh 命令全部以 git+curl+REST API 等价替代；API 建仓时中文 description 触发 JSON 解析 400，改 ASCII 描述后成功
+- [x] 11. 收尾：完成标记更新并 commit 推送；`C:\Users\Lenovo\.sdlc\log.md` 条目更新为完成态；事后抽查方式已向用户提示
 
 ## 验证方式
 
@@ -57,4 +51,5 @@
 
 - 步骤 1-9 已完成，详见上方勾选与备注（2026-09-06）
 - 实现复核结论：独立复核 PASS（全新子代理逐项对照 + 亲跑验证）
-- 待办：步骤 10 部署门（等用户确认仓库名/建仓方式并授权）、步骤 11 收尾
+- 步骤 10-11 已完成：站点已上线 https://soflari.github.io/blog/ ，仓库 https://github.com/Soflari/blog
+- 任务完结（2026-09-06）
