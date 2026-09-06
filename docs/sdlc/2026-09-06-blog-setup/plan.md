@@ -25,23 +25,23 @@
 
 ## 步骤
 
-- [ ] 1. 初始化：先写 `.gitignore`（必含 `.venv/`、`site/`、`__pycache__/`，先于任何 uv 命令）；`git init -b main`（本机默认 `master` 而工作流监听 `main`）；`uv init --bare`；`uv add mkdocs-material`
-- [ ] 2. 把 intent.md 与 plan.md 写入 `docs/sdlc/2026-09-06-blog-setup/`，首次 commit（`.gitignore` + uv 项目文件 + SDLC 产物）
-- [ ] 3. 写 `mkdocs.yml`（按配置清单）
-- [ ] 4. 写首页、作者文件、MathJax 脚本、两篇示例文章（文章二的图片语法只以代码块展示、不实际引用，避免死链）
-- [ ] 5. 写 `.github/workflows/ci.yml`
-- [ ] 6. 写 `README.md`（怎么写新文章：目录/命名/front matter；本地预览命令；发布流程；中文搜索局限）
-- [ ] 7. 自测：`uv run mkdocs build --strict`；后台 `uv run mkdocs serve`（等端口就绪再 curl），首页、`/blog/`、任一文章页均 200，验证后停掉后台进程；`find site -path '*sdlc*' | wc -l` 为 0；浏览器确认中文界面、文章流、公式渲染并截图
-- [ ] 8. 自测通过后 `git add -A && git commit` 提交全部站点源码与工作流（关键：确保推送的 `main` 包含完整站点，否则 Actions 不触发、`gh-pages` 永不生成）
-- [ ] 9. 独立复核：改动文件 >3，另派未参与实施的只读子代理，只凭本计划逐项对照并亲自运行验证命令、贴输出
-- [ ] 10. 部署门（唯一需另行授权环节）：
-  1. 与用户确认 GitHub 用户名、仓库名，确认建公开仓库（GitHub 免费版私有仓库不支持 Pages）
-  2. 按实际地址修正 `mkdocs.yml` 的 `site_url` 并 commit
-  3. 用户授权后 `gh repo create` 建远端仓库并推送 `main`
-  4. 等待 Actions 成功：`gh run list --branch main --limit 1` 看状态；`git ls-remote --heads origin gh-pages` 非空作为分支已生成的直接证据
-  5. 开通 Pages：`gh api -X POST repos/{owner}/{repo}/pages -f 'source[branch]=gh-pages' -f 'source[path]=/'`（须 POST 且分支已存在，故排在 4 之后）
-  6. curl Pages 地址确认 200；非 200 则等 30-60 秒重试再判失败（Pages 有传播延迟）
-- [ ] 11. 收尾：复核结论与完成标记追加进本文件并单独 commit 该更新；`C:\Users\Lenovo\.sdlc\log.md` 追加一行；向用户提示事后抽查方式
+- [x] 1. 初始化：先写 `.gitignore`（含 `.venv/`、`site/`、`__pycache__/`，另加 `.zcode/`）；`git init -b main`；`uv init --bare`；`uv add mkdocs-material`（锁定 9.7.7+）
+- [x] 2. intent.md 与 plan.md 入 `docs/sdlc/2026-09-06-blog-setup/`，首次 commit `9b94bbf`
+- [x] 3. `mkdocs.yml` 按配置清单完成。实施备注：① 该版本 Material 要求作者条目必填 avatar，已生成占位图 `docs/assets/avatar.png` 并在 `.authors.yml` 引用；② 博客插件会自动脚手架 `docs/blog/index.md`（默认英文标题 "Blog"），已改为中文标题；③ 占位 `site_url` 若带子路径会让开发服务器按子路径挂载，故占位值用根路径 `https://example.github.io/`，部署门时再改
+- [x] 4. 首页、作者文件、MathJax 脚本、两篇示例文章完成（文章二图片语法仅代码块展示；两篇文章加了英文 `slug` 避免中文 URL）
+- [x] 5. `.github/workflows/ci.yml` 完成
+- [x] 6. `README.md` 完成
+- [x] 7. 自测全部通过：strict 构建 EXIT=0 零警告；serve 后首页/博客/两篇文章/归档/分类页均 200；`find site -path '*sdlc*' | wc -l` = 0；浏览器整页截图经视觉核验：界面全中文、MathJax 行内与块级公式均正确渲染（$e^{i\pi}+1=0$ 与 argmin 求和公式）、无排版问题
+- [x] 8. 全部站点源码与工作流已 commit `b8d855b`（10 文件 394 行），工作树干净
+- [x] 9. 独立复核 PASS（2026-09-06，全新只读子代理）：文件清单/关键配置/CI/git 状态 4 大项全过，验证命令亲跑贴输出均符合预期。其「avatar.png 不存在」的观察经查为误报（文件存在且被跟踪）
+- [ ] 10. 部署门（唯一需另行授权环节）。执行环境偏差：本机未装 `gh` CLI，原计划中 gh 命令不可用，改用等价路径：
+  1. 已确认 GitHub 身份：用户名 `Soflari`（SSH 认证实测通过，密钥与代理配置在 `~/.ssh/config`）；已核查其名下无 `blog`、无 `soflari.github.io` 仓库，两名字可用
+  2. 与用户确认仓库名与建仓方式（网页建仓或本机凭据 API 建仓）→ 修正 `site_url` 并 commit
+  3. 授权后加 SSH remote 推送 `main`
+  4. 等待 Actions：轮询 `git ls-remote --heads origin gh-pages`（非空即分支已生成）+ 公开 API `api.github.com/repos/Soflari/<repo>/actions/runs` 看结论
+  5. 开通 Pages 指向 `gh-pages` 分支（gh 不可用：用户网页 Settings→Pages 操作，或经授权用本机凭据调 REST API POST）
+  6. curl Pages 地址确认 200（非 200 等 30-60 秒重试）
+- [ ] 11. 收尾：完成标记与复核结论更新 commit；`C:\Users\Lenovo\.sdlc\log.md` 追加一行；向用户提示事后抽查方式
 
 ## 验证方式
 
@@ -54,3 +54,7 @@
 ## 完成标记
 
 （每完成一步把 `[ ]` 改成 `[x]` 并简注结果；跨会话续作从这里恢复）
+
+- 步骤 1-9 已完成，详见上方勾选与备注（2026-09-06）
+- 实现复核结论：独立复核 PASS（全新子代理逐项对照 + 亲跑验证）
+- 待办：步骤 10 部署门（等用户确认仓库名/建仓方式并授权）、步骤 11 收尾
