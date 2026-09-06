@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://soflari.github.io/blog/</loc>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+    <url>
+         <loc>https://soflari.github.io/blog/blog/</loc>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+    <url>
+         <loc>https://soflari.github.io/blog/blog/2026/09/06/hello-world/</loc>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+    <url>
+         <loc>https://soflari.github.io/blog/blog/2026/09/06/markdown-guide/</loc>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+    <url>
+         <loc>https://soflari.github.io/blog/blog/archive/2026/</loc>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+    <url>
+         <loc>https://soflari.github.io/blog/blog/category/%E5%85%AC%E5%91%8A/</loc>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+    <url>
+         <loc>https://soflari.github.io/blog/blog/category/%E6%95%99%E7%A8%8B/</loc>
+         <lastmod>2026-09-06</lastmod>
+    </url>
+</urlset>
