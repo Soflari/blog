@@ -64,7 +64,7 @@ docs/
 ## 需要改的占位内容
 
 - `mkdocs.yml`：`site_name`（站点名）、`site_url`（Pages 地址）、`site_description`
-- `docs/blog/.authors.yml`：作者名与介绍
+- `docs/blog/.authors.yml`：作者名与介绍（头像当前用 GitHub 头像 `https://github.com/Soflari.png`，可换自定义图片，放 `docs/blog/` 下用相对文件名引用，勿用 `../` 开头路径）
 - `docs/index.md`：首页欢迎语
 
 ## 评论区

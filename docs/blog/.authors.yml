@@ -1,6 +1,9 @@
-# 作者信息（TODO: 改成你自己的名字和介绍；avatar 可换成本地图片或网络头像）
+# 作者信息（TODO: 改成你自己的名字和介绍）
 authors:
   me:
     name: 博客主人
     description: 占位作者介绍
-    avatar: ../assets/avatar.png
+    # GitHub 头像（自动跟随你在 GitHub 上设置的头像）
+    # 若想用自定义图片：放到 docs/blog/ 目录下（与本文件同级），写成相对文件名如 avatar: avatar.png
+    # 注意不要用 ../ 开头的路径——子路径部署时插件会算错层级
+    avatar: https://github.com/Soflari.png
