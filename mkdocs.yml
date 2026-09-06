@@ -1,0 +1,81 @@
+# 站点基础信息
+site_name: 我的博客                      # TODO: 改成你的站点名
+site_url: https://example.github.io/    # TODO: 部署时改成实际 Pages 地址（项目仓库会带 /<仓库名>/ 子路径）
+site_description: 个人博客
+
+# 主题
+theme:
+  name: material
+  language: zh                           # Material 的界面语言键是 language（不是 locale）
+  features:
+    - navigation.top                     # 返回顶部按钮
+    - navigation.footer                  # 页脚上一页/下一页
+    - search.suggest                     # 搜索联想
+    - search.highlight                   # 搜索结果高亮
+    - content.code.copy                  # 代码块一键复制
+  palette:                               # 亮暗色自动跟随 + 手动切换
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+
+# 插件
+plugins:
+  - blog:
+      post_readtime: false               # 关闭阅读时长估算（对中文不可靠）
+  - tags                                 # 博客文章的标签功能依赖此插件
+  - search
+
+# Markdown 扩展（Material 推荐集 + 公式支持）
+markdown_extensions:
+  - abbr
+  - admonition                          # 提示框 !!! note
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true                   # 标题锚点链接
+  - pymdownx.arithmatex:
+      generic: true                     # MathJax 渲染所需的 Markdown 侧配置
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details                    # 可折叠块 ???
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+  - pymdownx.inlinehilite               # 行内代码高亮
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences                # 嵌套代码块
+  - pymdownx.tabbed:
+      alternate_style: true             # 选项卡
+  - pymdownx.tasklist:
+      custom_checkbox: true             # 任务列表
+
+# 公式渲染：本地配置脚本 + CDN 库，两项缺一不可
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# SDLC 流程产物目录不参与站点构建，防止内部文档发布到公网
+exclude_docs: |
+  sdlc/
+
+# 导航（博客文章由 blog 插件自动接入，不要手工列出）
+nav:
+  - 首页: index.md
+  - 博客:
+      - blog/index.md

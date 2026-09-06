@@ -1,0 +1,6 @@
+# 作者信息（TODO: 改成你自己的名字和介绍；avatar 可换成本地图片或网络头像）
+authors:
+  me:
+    name: 博客主人
+    description: 占位作者介绍
+    avatar: ../assets/avatar.png
