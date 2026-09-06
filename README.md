@@ -67,6 +67,14 @@ docs/
 - `docs/blog/.authors.yml`：作者名与介绍
 - `docs/index.md`：首页欢迎语
 
+## 评论区
+
+文章页底部带 giscus 评论区，评论数据存在 GitHub Discussions（`Soflari/blog` 仓库的 Announcements 分类），评论者需登录 GitHub 账号。
+
+- 所有文章默认开启（`docs/blog/posts/.meta.yml` 里 `comments: true`）
+- 单篇关闭：在该文章 front matter 加 `comments: false`
+- 评论主题自动跟随站点亮暗色切换
+
 ## 已知局限
 
 - 站内搜索基于 lunr，中文分词能力有限：整词命中可用，模糊/语义检索效果一般；后续如需更好的中文搜索可考虑接入第三方方案

@@ -1,0 +1,2 @@
+# 该目录下所有文章默认开启评论区（单篇关闭：文章 front matter 写 comments: false）
+comments: true

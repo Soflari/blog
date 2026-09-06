@@ -6,6 +6,7 @@ site_description: 个人博客
 # 主题
 theme:
   name: material
+  custom_dir: overrides                  # 主题覆盖目录（放评论区等自定义局部模板）
   language: zh                           # Material 的界面语言键是 language（不是 locale）
   features:
     - navigation.top                     # 返回顶部按钮
@@ -27,6 +28,7 @@ theme:
 
 # 插件
 plugins:
+  - meta                                 # 读取 .meta.yml 为目录下所有页面批量注入 front matter（用于开启评论）
   - blog:
       post_readtime: false               # 关闭阅读时长估算（对中文不可靠）
   - tags                                 # 博客文章的标签功能依赖此插件
