@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://soflari.github.io/blog/blog/">
+        <link rel="canonical" href="https://soflari.github.io/blog/blog/2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../../../06/13/esl%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%BA%E5%B1%95%E5%BC%80%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/">
       
       
-        <link rel="next" href="category/%E5%85%AC%E5%91%8A/">
+        <link rel="next" href="../../17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>博客 - 我的博客</title>
+        <title>注意力模块的张量表示及梯度推导 - 我的博客</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -77,6 +77,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -89,7 +94,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href=".." title="我的博客" class="md-header__button md-logo" aria-label="我的博客" data-md-component="logo">
+    <a href="../../../../.." title="我的博客" class="md-header__button md-logo" aria-label="我的博客" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -109,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              博客
+              注意力模块的张量表示及梯度推导
             
           </span>
         </div>
@@ -206,7 +211,9 @@
           
             
               
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -215,7 +222,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="我的博客" class="md-nav__button md-logo" aria-label="我的博客" data-md-component="logo">
+    <a href="../../../../.." title="我的博客" class="md-nav__button md-logo" aria-label="我的博客" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -233,7 +240,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../../../.." class="md-nav__link">
         
   
   
@@ -310,17 +317,10 @@
   
   
     
-      
-    
   
   
     <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+      <a href="../../../../" class="md-nav__link">
         
   
   
@@ -336,7 +336,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -398,7 +397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="archive/2026/" class="md-nav__link">
+      <a href="../../../../archive/2026/" class="md-nav__link">
         
   
   
@@ -428,7 +427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="archive/2025/" class="md-nav__link">
+      <a href="../../../../archive/2025/" class="md-nav__link">
         
   
   
@@ -513,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="category/%E5%85%AC%E5%91%8A/" class="md-nav__link">
+      <a href="../../../../category/%E5%85%AC%E5%91%8A/" class="md-nav__link">
         
   
   
@@ -543,7 +542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="category/%E6%95%99%E7%A8%8B/" class="md-nav__link">
+      <a href="../../../../category/%E6%95%99%E7%A8%8B/" class="md-nav__link">
         
   
   
@@ -587,6 +586,8 @@
             
             
               
+                
+              
               <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
@@ -596,6 +597,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -604,619 +607,79 @@
             
           
           
-  <div class="md-content" data-md-component="content">
-    <div class="md-content__inner">
-      <header class="md-typeset">
-        <p>欢迎阅读我的文章。列表按发布时间倒序排列，也可通过「归档」「分类」浏览。</p>
-      </header>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/Soflari.png" alt="博客主人">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-09-06 00:00:00+00:00">2026年9月6日</time></li>
-        
-          <li class="md-meta__item">
-            分类于
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    回到主页
+                  </span>
+                </a>
+              </div>
+            </div>
             
-              <a href="category/%E5%85%AC%E5%91%8A/" class="md-meta__link">公告</a></li>
-        
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="_1"><a class="toclink" href="2026/09/06/hello-world/">你好，世界</a></h2>
-<p>这是本博客的第一篇示例文章，用来说明文章的基本写法。写正式文章时可以直接把它替换掉。</p>
-<h3 id="_2"><a class="toclink" href="2026/09/06/hello-world/#_2">文章放在哪里</a></h3>
-<p>所有文章放在 <code>docs/blog/posts/</code> 目录下，文件名建议用「日期-标题缩写」的格式，例如：</p>
-<div class="highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docs/blog/posts/2026-09-06-hello-world.md
-</span></code></pre></div>
-<h3 id="_3"><a class="toclink" href="2026/09/06/hello-world/#_3">文章开头的元数据</a></h3>
-<p>每篇文章顶部有一段 YAML「front matter」，用来声明日期、分类、标签和作者：</p>
-<div class="highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nn">---</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-09-06</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">categories</span><span class="p">:</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">公告</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">tags</span><span class="p">:</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">开始</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">authors</span><span class="p">:</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">me</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nn">---</span>
-</span></code></pre></div>
-<ul>
-<li><code>date</code>：发布日期，博客首页按它倒序排列</li>
-<li><code>categories</code>：分类，出现在归档与分类视图</li>
-<li><code>tags</code>：标签，点击可跳到同标签文章列表</li>
-<li><code>authors</code>：作者，对应 <code>docs/blog/.authors.yml</code> 里定义的条目</li>
-</ul>
-<h3 id="_4"><a class="toclink" href="2026/09/06/hello-world/#_4">公式演示</a></h3>
-<p>行内公式这样写：<span class="arithmatex">\(e^{i\pi} + 1 = 0\)</span>。</p>
-<p>块级公式这样写：</p>
-<div class="arithmatex">\[
-\hat{\theta} = \arg\min_{\theta} \sum_{i=1}^{n} \left( y_i - f_\theta(x_i) \right)^2
-\]</div>
-<p>更多写法（代码块、提示框、表格、选项卡等）见下一篇文章《写作语法指南》。</p>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/Soflari.png" alt="博客主人">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2026-09-06 00:00:00+00:00">2026年9月6日</time></li>
-        
-          <li class="md-meta__item">
-            分类于
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://github.com/Soflari.png" alt="博客主人">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          博客主人
+                        
+                      </strong>
+                      <br>
+                      占位作者介绍
+                    </span>
+                  </div>
+                
+              </div>
             
-              <a href="category/%E6%95%99%E7%A8%8B/" class="md-meta__link">教程</a></li>
-        
-        
-        
-      </ul>
-      
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    元数据
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2025-11-16 00:00:00+00:00" class="md-ellipsis">2025年11月16日</time>
+                      </div>
+                    </li>
+                    
+                    
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+            
+          </nav>
+          
+        </div>
+      </div>
     </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="_1"><a class="toclink" href="2026/09/06/markdown-guide/">写作语法指南</a></h2>
-<p>这篇文章演示本站支持的主要写作语法，写新文章时可以当模板抄。</p>
-<h3 id="_2"><a class="toclink" href="2026/09/06/markdown-guide/#_2">文字格式</a></h3>
-<p><strong>加粗</strong>、<em>斜体</em>、<code>行内代码</code>、~~删除线~~、<mark>高亮</mark>、H~2~O 下标、x<sup>2</sup> 上标。</p>
-<p><a href="https://squidfunk.github.io/mkdocs-material/">外部链接</a>会自动识别，站内链接示例：<a href="../">回到首页</a>。</p>
-<h3 id="_3"><a class="toclink" href="2026/09/06/markdown-guide/#_3">列表</a></h3>
-<p>无序列表：</p>
-<ul>
-<li>第一项</li>
-<li>第二项<ul>
-<li>嵌套项</li>
-</ul>
-</li>
-</ul>
-<p>有序列表：</p>
-<ol>
-<li>第一步</li>
-<li>第二步</li>
-</ol>
-<p>任务列表：</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 已完成的事</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 待办的事</li>
-</ul>
-<h3 id="_4"><a class="toclink" href="2026/09/06/markdown-guide/#_4">表格</a></h3>
-<table>
-<thead>
-<tr>
-<th>列一</th>
-<th>列二</th>
-<th>列三</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>内容</td>
-<td>内容</td>
-<td>内容</td>
-</tr>
-<tr>
-<td>内容</td>
-<td>内容</td>
-<td>内容</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_5"><a class="toclink" href="2026/09/06/markdown-guide/#_5">代码块</a></h3>
-<p>带语法高亮和行号，右上角有一键复制按钮：</p>
-<div class="highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">"""生成斐波那契数列前 n 项。"""</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">return</span> <span class="n">result</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
-</span></code></pre></div>
-<p>行内高亮：<code>print("hello")</code> 中的 <code>print</code> 也可以写成 <code class="highlight"><span class="nb">print</span></code>。</p>
-<h3 id="_6"><a class="toclink" href="2026/09/06/markdown-guide/#_6">提示框</a></h3>
-<div class="admonition note">
-<p class="admonition-title">说明</p>
-<p>这是一条说明。类似的还有 <code>tip</code>（技巧）、<code>warning</code>（警告）、<code>danger</code>（危险）。</p>
-</div>
-<details class="tip">
-<summary>可折叠内容（点击展开）</summary>
-<p>折叠块适合放长代码或补充细节，默认收起，不占版面。</p>
-</details>
-<h3 id="_7"><a class="toclink" href="2026/09/06/markdown-guide/#_7">选项卡</a></h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">方法一</label><label for="__tabbed_1_2">方法二</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>第一种做法的说明或代码。</p>
-</div>
-<div class="tabbed-block">
-<p>第二种做法的说明或代码。</p>
-</div>
-</div>
-</div>
-<h3 id="_8"><a class="toclink" href="2026/09/06/markdown-guide/#_8">数学公式</a></h3>
-<p>行内公式：质能方程 <span class="arithmatex">\(E = mc^2\)</span> 出现在句子中间。</p>
-<p>块级公式单独成行并居中：</p>
-<div class="arithmatex">\[
-\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
-\]</div>
-<p>多行对齐环境：</p>
-<div class="arithmatex">\[
-\begin{aligned}
-\nabla \cdot \mathbf{E} &amp;= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \mathbf{B} &amp;= 0
-\end{aligned}
-\]</div>
-<p>写法要点：行内用 <code>$...$</code>，块级用 <code>$$...$$</code>，都由 MathJax 渲染。</p>
-<h3 id="_9"><a class="toclink" href="2026/09/06/markdown-guide/#_9">图片</a></h3>
-<p>图片语法如下（本站未内置示例图片，实际使用时把 <code>图片路径或URL</code> 换成真实地址，站内图片建议放在 <code>docs/assets/</code> 下）：</p>
-<div class="highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>![<span class="nt">图片替代文字</span>](<span class="na">图片路径或URL</span>)
-</span></code></pre></div>
-<h3 id="_10"><a class="toclink" href="2026/09/06/markdown-guide/#_10">脚注与其他</a></h3>
-<p>脚注示例<sup id="fnref:1"><a class="footnote-ref" href="2026/09/06/markdown-guide/#fn:1">1</a></sup>。</p>
-<p>缩写示例（鼠标悬停看提示）：<abbr title="HyperText Markup Language">HTML</abbr> 是一种标记语言。</p>
-<div class="footnote">
-<hr />
-<ol>
-<li id="fn:1">
-<p>脚注内容出现在页面底部。&#160;<a class="footnote-backref" href="2026/09/06/markdown-guide/#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
-</li>
-</ol>
-</div>
-    
-    
-  </div>
-</article>
+    <article class="md-content__inner md-typeset">
       
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
         
-          <span class="md-author">
-            <img src="https://github.com/Soflari.png" alt="博客主人">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-11-17 00:00:00+00:00">2025年11月17日</time></li>
-        
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="mlp"><a class="toclink" href="2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/">MLP的张量表示及梯度推导</a></h2>
-<h3 id="_1"><a class="toclink" href="2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_1">代码部分</a></h3>
-<p>这是多层感知机（MLP）的一段示例代码</p>
-<div class="highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">NeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="p">)</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="k">return</span> <span class="n">logits</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="n">pred_probab</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">logits</span><span class="p">)</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pred_probab</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</span></code></pre></div>
-<h3 id="_2"><a class="toclink" href="2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_2">神经网络的结构</a></h3>
-<ol>
-<li><code>nn.Flatten()</code>
-   这个函数将输入张量的各维度展平成一个向量。默认从索引1开始到索引-1结束，要注意的是索引是从0开始的，所以索引1其实是指的第2个。
-   这里的输入X维度为 <span class="arithmatex">\([1,28,28]\)</span> ，经过<code>nn.Flatten()</code>后应该是 <span class="arithmatex">\([1,28*28]\)</span> 。
-   从张量角度看，</li>
-</ol>
-<p><span class="arithmatex">\(\displaystyle x_{b1ij}=x_{bn}, \quad n=0*28*28+i*28+j\)</span>
-2. <code>linear_relu_stack</code>
-   这个函数将一系列的神经层排成一个列表，数据将从这些层中流出。过程中会改变维度。</p>
-<ol>
-<li><code>Linear(28*28, 512)</code>
-张量表示: <span class="arithmatex">\(y_{bm}=x_{bn}w_{nm}+\mathbf{1}_{b}b_{m}\)</span></li>
-<li><code>ReLU</code>
-张量表示: <span class="arithmatex">\(y_{bm}^{r}=\text{ReLU}(y_{bm})\)</span></li>
-<li><code>Linear(512,512)</code>
-张量表示: <span class="arithmatex">\(y_{bm'}'=y_{bm}^{r}w_{mm'}+\mathbf{1}_{b}b_{m'}\)</span></li>
-<li><code>ReLU</code>
-张量表示: <span class="arithmatex">\(y_{bm'}^{r}=\text{ReLU}(y_{bm'})\)</span></li>
-<li><code>Linear(512,10)</code>
-张量表示: <span class="arithmatex">\(y_{bo}=y_{bm'}^{r}w_{m'o}+\mathbf{1}_{b}b_{o}\)</span></li>
-<li><code>Softmax(dim=1)</code>
-   张量表示：</li>
-</ol>
-<p><span class="arithmatex">\(\displaystyle s_{bi}= \frac{e^{x_{bi}}}{\mathbf{1}_{kj}e^{x_{kj}}}\)</span>
-4. 交叉熵损失</p>
-<p><span class="arithmatex">\(\displaystyle c_{b}=-\log{s_{b\text{T}}}\)</span></p>
-<p>交叉熵损失是单分类损失函数，这里的 <span class="arithmatex">\(\text{T}\)</span> 是代表真实标签的常量索引，这里的 <span class="arithmatex">\(\text{T}\)</span> 不是一种哑指标。</p>
-<h3 id="_3"><a class="toclink" href="2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_3">推导梯度</a></h3>
-<h4 id="_4"><a class="toclink" href="2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_4">交叉熵部分梯度</a></h4>
-<p>重点是利用反向传播，也就是由终点向起点一层层推。</p>
-<ol>
-<li><span class="arithmatex">\(c_{b}\)</span>
-   <span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial s_{ki}}=-\frac{\partial \log s_{b\text{T}}}{\partial s_{ki}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}\)</span></li>
-<li><span class="arithmatex">\(s_{bi}\)</span>
-   <span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =\frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}}\)</span>
-   令 <span class="arithmatex">\(\sigma=\mathbf{1}_{kj}e^{x_{kj}}\)</span> ,
-   <span class="arithmatex">\(\displaystyle \frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}} =\frac{\partial\sigma}{\partial y_{ko}} =\frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}})\)</span></li>
-<li><span class="arithmatex">\(\frac{\partial e^{y_{bi}}}{\partial y_{ko}}\)</span>
-<span class="arithmatex">\(\displaystyle \frac{\partial e^{y_{bi}}}{\partial y_{ko}} =e^{y_{bi}}\frac{\partial y_{bi}}{\partial y_{ko}} =e^{y_{bi}}\delta_{bk}\delta_{io}\)</span></li>
-<li><span class="arithmatex">\(\frac{\partial \sigma}{\partial y_{ko}}\)</span>
-<span class="arithmatex">\(\displaystyle \frac{\partial \sigma}{\partial y_{ko}}=\frac{\partial \mathbf{1}_{bj}e^{y_{bj}}}{\partial y_{ko}} =\mathbf{1}_{bj}e^{y_{bj}}\delta_{bk}\delta_{jo}=\mathbf{1}_{ko}e^{y_{ko}} =e^{y_{ko}}\)</span>
-代入原式：
-<span class="arithmatex">\(\displaystyle \frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}}) =\frac{1}{\sigma^2}( e^{y_{bi}}\delta_{bk}\delta_{io}\sigma-e^{y_{bi}}e^{y_{ko}}) =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span>
-即
-<span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span>
-综合一下，现在就有
-<span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial y_{ko}} =\frac{\partial c_{b}}{\partial s_{ki}}\frac{\partial s_{bi}}{\partial y_{ko}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}(s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}) =s_{ko}-\delta_{bk}\delta_{To}\)</span>
-这里可以看出，交叉熵损失在最后一层的梯度，恰好等于第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(o\)</span> 个logits(概率值)减去第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(\text{T}\)</span> 个标签(也就是1).</li>
-</ol>
-<h4 id="_5"><a class="toclink" href="2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_5">单个线性层梯度</a></h4>
-<ul>
-<li>输入  <span class="arithmatex">\(X\)</span> : (∗, in_features)</li>
-<li>权重 <span class="arithmatex">\(A\)</span>  : (out_features,in_features)</li>
-<li>偏置  <span class="arithmatex">\(b\)</span> : (out_features)</li>
-<li>输出  <span class="arithmatex">\(Y\)</span> : (∗, out_features)</li>
-</ul>
-<p>PyTorch对线性层的定义：</p>
-<div class="arithmatex">\[
-Y=XA^{T}+b
-\]</div>
-<p>令 <span class="arithmatex">\(C=A^{T}\)</span> ，就有张量表示：</p>
-<div class="arithmatex">\[
-y_{ij}=x_{ik}c_{kj}+\mathbf{1}_{i}b_{j}
-\]</div>
-<p>上式中， <span class="arithmatex">\(k\)</span> 重复出现代表做了乘积，同时在等式左侧未出现，就还做了求和。 <span class="arithmatex">\(\mathbf{1}_{i}\)</span> 用于将 <span class="arithmatex">\(b_{j}\)</span> 广播成矩阵。</p>
-<p>根据 <a href="https://robotchinwag.com/posts/linear-layer-deriving-the-gradient-for-the-backward-pass/">Linear Layer, Deriving the Gradient for the Backward Pass</a> 的结果，我们有如下结论：</p>
-<ol>
-<li>对 <span class="arithmatex">\(X\)</span> 的梯度
-   <span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial x_{pq}}=\delta_{ip}c_{qj}\)</span></li>
-</ol>
-<div class="arithmatex">\[\begin{aligned}
-\frac{\partial l}{\partial x_{pq}} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial x_{pq}} \\
- &amp; =\frac{\partial l}{\partial y_{ij}}\delta_{ip}c_{qj} \\
- &amp; =\frac{\partial l}{\partial y_{pj}}c_{qj}
-\end{aligned}\]</div>
-<ol>
-<li>对 <span class="arithmatex">\(A\)</span> 的梯度</li>
-</ol>
-<div class="arithmatex">\[\begin{aligned}
-    \frac{\partial y_{ij}}{\partial a_{pq}} &amp; =\frac{\partial}{\partial a_{pq}}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\
-     &amp; =x_{ik}\frac{\partial c_{kj}}{\partial a_{pq}}
-    \end{aligned}\]</div>
-<p>由于 <span class="arithmatex">\(C=A^{T}\)</span> ， 所以有 <span class="arithmatex">\(c_{kj}=a_{jk}\)</span> 。继续有公式：</p>
-<div class="arithmatex">\[\begin{aligned}
-    \frac{\partial y_{ij}}{\partial a_{pq}} &amp; =x_{ik}\frac{\partial a_{jk}}{\partial a_{pq}} \\
-     &amp; =x_{ik}\delta_{jp}\delta_{kq} \\
-     &amp; =x_{iq}\delta_{jp}
-    \end{aligned}\]</div>
-<div class="arithmatex">\[\begin{aligned}
-    \frac{\partial l}{\partial a_{pq}} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial a_{pq}} \\
-     &amp; =\frac{\partial l}{\partial y_{ij}}x_{iq}\delta_{jp} \\
-     &amp; =\frac{\partial l}{\partial y_{ip}}x_{iq}
-    \end{aligned}\]</div>
-<ol>
-<li>对 <span class="arithmatex">\(b\)</span> 的梯度
-   <span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial y_{ij}}{\partial b_p} &amp; =\frac{\partial}{\partial b_p}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\ &amp; =\frac{\partial\left(\mathbf{1}_ib_j\right)}{\partial b_p} \\ &amp; =1_i\frac{\partial b_j}{\partial b_p} \end{aligned}\)</span>
-   <span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial b_p}=\mathbf{1}_i\delta_{jp}\)</span>
-   <span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial l}{\partial b_p} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial b_p} \\ &amp; =\frac{\partial l}{\partial y_{ij}}\mathbf{1}_i\delta_{jp} \\ &amp; =\frac{\partial l}{\partial y_{ip}}\mathbf{1}_i \end{aligned}\)</span></li>
-</ol>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/Soflari.png" alt="博客主人">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-11-17 00:00:00+00:00">2025年11月17日</time></li>
-        
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="_1"><a class="toclink" href="2025/11/17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/">卷积模块的张量表示及梯度推导</a></h2>
-<h3 id="_2"><a class="toclink" href="2025/11/17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_2">一维卷积</a></h3>
-<p><strong>Pytorch的定义</strong>
-<img alt="Pytorch卷积定义" src="../assets/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/Pasted_image_20251113124916.png" /></p>
-<div class="arithmatex">\[\operatorname{out}(N_i,C_{\operatorname{out}_j})=\operatorname{bias}(C_{\operatorname{out}_j})+\sum_{k=0}^{C_{in}-1}\operatorname{weight}(C_{\operatorname{out}_j},k)\star\operatorname{input}(N_i,k)\]</div>
-<p>写成数学形式：</p>
-<div class="arithmatex">\[
-y_{ni}=\sum_jv_{n(i+j)}w_{nj}
-\]</div>
-<p>偏置被放进求和号作为输入和卷积核的一部分。
-将批次忽略，也就是只看某个样本卷积操作的公式就有：</p>
-<div class="arithmatex">\[
-y_i=\sum_jv_{i+j}w_j
-\]</div>
-<p><strong>定义张量和索引：</strong></p>
-<ul>
-<li><span class="arithmatex">\(n\)</span> : Batch (批次) 索引 (对应 <span class="arithmatex">\(N_i\)</span> )</li>
-<li><span class="arithmatex">\(j\)</span> : 输出通道索引 (对应 <span class="arithmatex">\(C_{out, j}\)</span> )</li>
-<li><span class="arithmatex">\(k\)</span> : 输入通道索引 (对应 <span class="arithmatex">\(k\)</span> )</li>
-<li><span class="arithmatex">\(i\)</span> : 输出**空间**索引 (对应 <span class="arithmatex">\(i_{\bar{y}}\)</span> )</li>
-<li><span class="arithmatex">\(l\)</span> : 输入**空间**索引 (对应 <span class="arithmatex">\(l_{\bar{x}}\)</span> )</li>
-<li><span class="arithmatex">\(p\)</span> : 核 (kernel) **空间**索引 (对应 <span class="arithmatex">\(j_{\bar{k}}\)</span> )</li>
-</ul>
-<p><strong>现在定义参与运算的张量：</strong></p>
-<ul>
-<li><strong>输出 <span class="arithmatex">\(O\)</span> :</strong> <span class="arithmatex">\(O_{nji}\)</span> (Batch, Out-Channel, Out-Spatial)</li>
-<li><strong>输入 <span class="arithmatex">\(I\)</span> :</strong> <span class="arithmatex">\(I_{nkl}\)</span> (Batch, In-Channel, In-Spatial)</li>
-<li><strong>权重 <span class="arithmatex">\(W\)</span> :</strong> <span class="arithmatex">\(W_{jkp}\)</span> (Out-Channel, In-Channel, Kernel-Spatial)</li>
-<li><strong>偏差 <span class="arithmatex">\(B\)</span> :</strong> <span class="arithmatex">\(B_{j}\)</span> (Out-Channel)</li>
-<li><strong>卷积张量 <span class="arithmatex">\(C\)</span> :</strong> <span class="arithmatex">\(C_{ilp}\)</span> (Out-Spatial, In-Spatial, Kernel-Spatial)</li>
-</ul>
-<hr />
-<p><strong>定义卷积张量 <span class="arithmatex">\(C\)</span> :</strong>
-这个 <span class="arithmatex">\(C\)</span> 张量定义了卷积操作本身</p>
-<div class="arithmatex">\[C_{ijl}=
-\begin{cases}
-1, &amp; \mathrm{if} \quad l=i+j \\
-0, &amp; \mathrm{else} &amp; 
-\end{cases}\]</div>
-<p>卷积操作的张量计算公式：</p>
-<div class="arithmatex">\[y_i=C_{ijl}v_lw_j\]</div>
-<p>这里的 <span class="arithmatex">\(v\)</span> 表示输入数据，下标 <span class="arithmatex">\(l\)</span> 表示 <span class="arithmatex">\(v\)</span> 的第 <span class="arithmatex">\(l\)</span> 个分量。 <span class="arithmatex">\(w_{j}\)</span> 表示卷积核的第 <span class="arithmatex">\(j\)</span> 个分量。 <span class="arithmatex">\(C_{ijl}\)</span> 则表示卷积操作，将约束条件带入上式，就可得到</p>
-<div class="arithmatex">\[
-y_i=v_{i+j}w_j
-\]</div>
-<p>扩</p>
-<p><strong>加入步幅 <span class="arithmatex">\(s\)</span> 和膨胀 <span class="arithmatex">\(d\)</span> ：</strong>
-此时卷积操作加入了步幅长度 <span class="arithmatex">\(s\)</span> 和膨胀大小 <span class="arithmatex">\(d\)</span> ：</p>
-<div class="arithmatex">\[C_{ilp} = \begin{cases} 1, &amp; \text{if } l = s \cdot i + d \cdot p \\ 0, &amp; \text{else} \end{cases}\]</div>
-<p>让我们通过一个简单的例子（ <span class="arithmatex">\(d=1, s=2\)</span> vs <span class="arithmatex">\(s=1, d=2\)</span> ）来理解。
-<strong>Stride (步幅) 的效果: <span class="arithmatex">\(s=2, d=1\)</span></strong></p>
-<ul>
-<li><strong>公式变为：</strong> <span class="arithmatex">\(l = 2 \cdot i + j\)</span></li>
-<li><strong>它在做什么：</strong> 缩放**输出索引 <span class="arithmatex">\(i\)</span>** 。索引 <span class="arithmatex">\(i\)</span> 代表你正在计算**第几个**输出点。</li>
-<li><strong>我们来计算几个输出点：</strong></li>
-<li><strong>计算 <span class="arithmatex">\(y_0\)</span> (即 <span class="arithmatex">\(i=0\)</span> ):</strong></li>
-</ul>
-<p>关系是 <span class="arithmatex">\(l = 2 \cdot 0 + j = j\)</span> 。</p>
-<p><span class="arithmatex">\(y_0 = \sum_j v_{j} \cdot w_j = v_0w_0 + v_1w_1 + v_2w_2 + \dots\)</span></p>
-<p>（核从输入的第 0 个位置开始）
-  - <strong>计算 <span class="arithmatex">\(y_1\)</span> (即 <span class="arithmatex">\(i=1\)</span> ):</strong></p>
-<p>关系是 <span class="arithmatex">\(l = 2 \cdot 1 + j = 2 + j\)</span> 。</p>
-<p><span class="arithmatex">\(y_1 = \sum_j v_{2+j} \cdot w_j = v_2w_0 + v_3w_1 + v_4w_2 + \dots\)</span></p>
-<p>（核从输入的第 2 个位置开始）
-  - <strong>计算 <span class="arithmatex">\(y_2\)</span> (即 <span class="arithmatex">\(i=2\)</span> ):</strong></p>
-<p>关系是 <span class="arithmatex">\(l = 2 \cdot 2 + j = 4 + j\)</span> 。</p>
-<p><span class="arithmatex">\(y_2 = \sum_j v_{4+j} \cdot w_j = v_4w_0 + v_5w_1 + v_6w_2 + \dots\)</span></p>
-<p>（核从输入的第 4 个位置开始）
-- <strong>结论 (Stride):</strong>
-  请注意：从计算 <span class="arithmatex">\(y_0\)</span> 变到 <span class="arithmatex">\(y_1\)</span> ，你的核在输入 <span class="arithmatex">\(v\)</span> 上滑动（或“跳跃”）了 2 个位置（从 0 到 2）。你跳过了本应在 <span class="arithmatex">\(s=1\)</span> 时计算的那个输出点。
-  Stride 导致你计算的输出点 <span class="arithmatex">\(y_i\)</span> 的总数变少了。这就是缩放（下采样）效果的来源。</p>
-<p><strong>Dilation (扩张) 的效果: <span class="arithmatex">\(s=1, d=2\)</span></strong></p>
-<ul>
-<li><strong>公式变为：</strong> <span class="arithmatex">\(l = i + 2 \cdot j\)</span></li>
-<li><strong>它在做什么：</strong> 缩放**核索引 <span class="arithmatex">\(j\)</span>** 。索引 <span class="arithmatex">\(j\)</span> 代表核 <span class="arithmatex">\(w\)</span> 内部的**第几个**权重。</li>
-<li><strong>我们来计算几个输出点：</strong></li>
-<li><strong>计算 <span class="arithmatex">\(y_0\)</span> (即 <span class="arithmatex">\(i=0\)</span> ):</strong></li>
-</ul>
-<p>关系是 <span class="arithmatex">\(l = 0 + 2 \cdot j = 2j\)</span> 。</p>
-<p><span class="arithmatex">\(y_0 = \sum_j v_{2j} \cdot w_j = v_0w_0 + v_2w_1 + v_4w_2 + \dots\)</span>
-  - <strong>计算 <span class="arithmatex">\(y_1\)</span> (即 <span class="arithmatex">\(i=1\)</span> ):</strong></p>
-<p>关系是 <span class="arithmatex">\(l = 1 + 2 \cdot j = 1 + 2j\)</span> 。</p>
-<p><span class="arithmatex">\(y_1 = \sum_j v_{1+2j} \cdot w_j = v_1w_0 + v_3w_1 + v_5w_2 + \dots\)</span>
-  - <strong>计算 <span class="arithmatex">\(y_2\)</span> (即 <span class="arithmatex">\(i=2\)</span> ):</strong></p>
-<p>关系是 <span class="arithmatex">\(l = 2 + 2 \cdot j = 2 + 2j\)</span> 。</p>
-<p><span class="arithmatex">\(y_2 = \sum_j v_{2+2j} \cdot w_j = v_2w_0 + v_4w_1 + v_6w_2 + \dots\)</span>
-- <strong>结论 (Dilation):</strong>
-  请注意：我们没有跳过任何输出点（我们计算了 <span class="arithmatex">\(y_0, y_1, y_2, \dots\)</span> ）。
-  相反，为了计算单个输出点（比如 <span class="arithmatex">\(y_0\)</span> ），你的核 <span class="arithmatex">\(w\)</span> 的权重 ( <span class="arithmatex">\(w_0, w_1, w_2\)</span> ) 被应用到了间隔更开的输入点 ( <span class="arithmatex">\(v_0, v_2, v_4\)</span> ) 上。
-  Dilation 并没有减少输出点的数量，而是增大了单个核的感受野 (receptive field)。核被‘撑大’了，中间有了‘空洞’。这就是扩张的含义。</p>
-<h3 id="_3"><a class="toclink" href="2025/11/17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_3">一维卷积的梯度推导</a></h3>
-<p>前向公式：</p>
-<div class="arithmatex">\[
-y_i=C_{ijl}v_lw_j
-\]</div>
-<p>卷积算子 <span class="arithmatex">\(C_{ijl}\)</span> 有定义,</p>
-<div class="arithmatex">\[C_{ijl}=
-\begin{cases}
-1, &amp; \mathrm{if}\quad l=i+j \\
-0, &amp; \mathrm{else} &amp; &amp; 
-\end{cases}\]</div>
-<h4 id="_4"><a class="toclink" href="2025/11/17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_4">权重梯度</a></h4>
-<p>根据链式法则有,</p>
-<div class="arithmatex">\[\frac{\partial L}{\partial w_k}=\frac{\partial L}{\partial y_i}\frac{\partial y_i}{\partial w_k}\]</div>
-<p>先计算雅可比项, 此处有</p>
-<div class="arithmatex">\[\begin{aligned}
-\frac{\partial y_i}{\partial w_k}=C_{ijl}v_l\frac{\partial w_j}{\partial w_k}=C_{ijl}v_l\delta_{jk}=C_{ikl}v_l
-\end{aligned}\]</div>
-<p>代回链式法则，则有</p>
-<div class="arithmatex">\[
-\frac{\partial L}{\partial w_k}
-=\frac{\partial L}{\partial y_i}C_{ikl}v_l
-=\frac{\partial L}{\partial y_i}v_{i+k}
-\]</div>
-<p><strong>结论：</strong> 观察权重的梯度公式可以发现, 权重的梯度等于输入数据与误差信号做互相关。也就是哪个数据点与当前的误差信号最相似，就大幅更新这个权重。</p>
-<h4 id="_5"><a class="toclink" href="2025/11/17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_5">数据梯度</a></h4>
-<p>我们对第 <span class="arithmatex">\(m\)</span> 个输入分量 <span class="arithmatex">\(v_m\)</span> 求偏导。这是为了将误差继续向前传播。
-继续应用链式法则：</p>
-<div class="arithmatex">\[\frac{\partial L}{\partial v_m}=\frac{\partial L}{\partial y_i}\frac{\partial y_i}{\partial v_m}\]</div>
-<p>先计算雅可比项, 此处有</p>
-<div class="arithmatex">\[\begin{aligned}
-\frac{\partial y_i}{\partial v_m}=C_{ijl}w_j\frac{\partial v_l}{\partial v_m}=C_{ijl}w_j\delta_{lm}=C_{ijm}w_j
-\end{aligned}\]</div>
-<p>代回链式法则，则有</p>
-<div class="arithmatex">\[\frac{\partial L}{\partial v_m}=\frac{\partial L}{\partial y_i}C_{ijm}w_j\]</div>
-<p>在这个求和式中， <span class="arithmatex">\(i\)</span> 是哑指标，需要确定 <span class="arithmatex">\(i\)</span> 的值，又因为 <span class="arithmatex">\(m=i+j\)</span> ，所以有 <span class="arithmatex">\(i=m-j\)</span> ，代回公式有</p>
-<div class="arithmatex">\[
-\frac{\partial L}{\partial v_m}=\frac{\partial L}{\partial y_{m-j}}w_j
-\]</div>
-<p><strong>结论：</strong> 输入的梯度等于 <strong>输出梯度与翻转后的权重 <span class="arithmatex">\(w\)</span> 的卷积（Full Convolution）</strong>。这在深度学习框架中通常被称为 <strong>转置卷积（Transposed Convolution）</strong> 或 <strong>反卷积（Deconvolution）</strong> 的数学基础。</p>
-<h3 id="_6"><a class="toclink" href="2025/11/17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_6">二维卷积</a></h3>
-<p>为简化表示，我们做如下索引替换：</p>
-<ul>
-<li>输出索引为 <span class="arithmatex">\((a, b)\)</span></li>
-<li>核索引为 <span class="arithmatex">\((c, d)\)</span></li>
-<li>
-<p>输入索引为 <span class="arithmatex">\((e, f)\)</span></p>
-</li>
-<li>
-<p><strong>定义张量：</strong></p>
-</li>
-<li>令输出张量为 <span class="arithmatex">\(y\)</span> ，其分量为 <span class="arithmatex">\(y_{ab}\)</span> 。</li>
-<li>令输入张量为 <span class="arithmatex">\(v\)</span> ，其分量为 <span class="arithmatex">\(v_{ef}\)</span> 。</li>
-<li>令核张量为 <span class="arithmatex">\(w\)</span> ，其分量为 <span class="arithmatex">\(w_{cd}\)</span> 。</li>
-<li>令 <span class="arithmatex">\((\star 2D)\)</span> 卷积张量为 <span class="arithmatex">\(C\)</span> ，其分量为 <span class="arithmatex">\(C_{abcdef}\)</span> 。</li>
-<li><strong>张量缩并（爱因斯坦求和形式）：</strong>
-   完整的 2D 卷积操作（类似于 1D 情况）可以写为：
-   <span class="arithmatex">\(\displaystyle y_{ab} = \sum_{c,d} \sum_{e,f} C_{abcdef} \cdot v_{ef} \cdot w_{cd}\)</span>
-   使用爱因斯坦求和约定（省略 <span class="arithmatex">\(\sum\)</span> 符号），我们得到一个非常简洁的张量形式：
-   <span class="arithmatex">\(\displaystyle y_{ab} = C_{abcdef} v_{ef} w_{cd}\)</span></li>
-<li><span class="arithmatex">\(a, b\)</span> 是**自由索引**，代表输出张量的维度。</li>
-<li><span class="arithmatex">\(c, d, e, f\)</span> 是**哑索引（缩并索引）**，因为它们在右侧重复出现，表示需要对它们的所有可能值求和。</li>
-<li><strong>六阶卷积张量 <span class="arithmatex">\(C\)</span> 的定义：</strong>
-   这个六阶张量 <span class="arithmatex">\(C_{abcdef}\)</span> 的定义即是图像中 <span class="arithmatex">\((\star 2D)\)</span> 的定义：
-   <span class="arithmatex">\(\displaystyle C_{abcdef} = \begin{cases} 1, &amp; \text{if } (e, f) = (a, b) + (c, d) \\ 0, &amp; \text{else} \end{cases}\)</span>
-   这等价于两个独立的条件必须同时满足：</li>
-<li><span class="arithmatex">\(e = a + c\)</span></li>
-<li><span class="arithmatex">\(f = b + d\)</span></li>
-</ul>
-<p><strong>验证</strong>
-这种形式再次等价于标准的 2D 卷积。如果我们从 <span class="arithmatex">\(y_{ab} = \sum_{c,d} \sum_{e,f} C_{abcdef} v_{ef} w_{cd}\)</span> 开始：</p>
-<ol>
-<li>对 <span class="arithmatex">\(e, f\)</span> 求和：由于 <span class="arithmatex">\(C_{abcdef}\)</span> 仅在 <span class="arithmatex">\(e=a+c\)</span> 和 <span class="arithmatex">\(f=b+d\)</span> 时为 1， <span class="arithmatex">\(\sum_{e,f} C_{abcdef} v_{ef}\)</span> 这一项塌缩为 <span class="arithmatex">\(v_{a+c, b+d}\)</span> 。</li>
-<li>代回结果： <span class="arithmatex">\(y_{ab} = \sum_{c,d} v_{a+c, b+d} \cdot w_{cd}\)</span> 。</li>
-<li>这正是 2D 卷积的标准定义（将 <span class="arithmatex">\((a,b)\)</span> 视为输出坐标， <span class="arithmatex">\((c,d)\)</span> 视为核坐标）。</li>
-</ol>
-<p><strong>加入步幅和膨胀</strong></p>
-<ul>
-<li><strong>步幅 (Stride):</strong> <span class="arithmatex">\(s = (s_0, s_1)\)</span></li>
-<li>
-<p><strong>扩张 (Dilation):</strong> <span class="arithmatex">\(d = (d_0, d_1)\)</span></p>
-</li>
-<li>
-<p><strong>张量缩并 (爱因斯坦求和形式):</strong>
-   整个 2D 卷积操作（包含通道）可以写为：
-   <span class="arithmatex">\(\displaystyle y_{ab} = C_{abcdef} v_{ef} w_{cd}\)</span></p>
-</li>
-<li><span class="arithmatex">\(a, b\)</span> 是**自由索引**，定义了我们正在计算的输出张量的分量。</li>
-<li><span class="arithmatex">\(c, d, e, f\)</span> 是**哑索引**，表示我们需要对这些索引的所有可能值求和。</li>
-<li>
-<p><strong>六阶卷积张量 <span class="arithmatex">\(C\)</span> 的定义:</strong>
-   这个六阶张量 <span class="arithmatex">\(C\)</span> 包含了所有关于步幅和扩张的**结构信息**。其分量 <span class="arithmatex">\(C_{abcdef}\)</span> 定义如下：
-   <span class="arithmatex">\(\displaystyle C_{abcdef} = \begin{cases} 1, &amp; \text{if } (e = s_0 \cdot a + d_0 \cdot c) \quad \textbf{and} \quad (f = s_1 \cdot b + d_1 \cdot d) \\ 0, &amp; \text{else} \end{cases}\)</span>
-   这个定义非常清晰地展示了 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(d\)</span> 是如何分别作用于不同维度的：</p>
-</li>
-<li>
-<p><span class="arithmatex">\(s_0, d_0\)</span> 掌控着第 0 维 (索引 <span class="arithmatex">\(a, c, e\)</span> ) 的映射关系。</p>
-</li>
-<li><span class="arithmatex">\(s_1, d_1\)</span> 掌控着第 1 维 (索引 <span class="arithmatex">\(b, d, f\)</span> ) 的映射关系。</li>
-</ul>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/Soflari.png" alt="博客主人">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-11-16 00:00:00+00:00">2025年11月16日</time></li>
-        
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="_1"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/">注意力模块的张量表示及梯度推导</a></h2>
-<h2 id="_2"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_2">自注意力</a></h2>
+  
+
+
+
+
+<h1 id="_1">注意力模块的张量表示及梯度推导<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="_2">自注意力<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
 <p><strong>代码部分</strong></p>
 <div class="highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span> 
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span> 
@@ -1234,7 +697,7 @@ y_i=C_{ijl}v_lw_j
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">context_vecs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">attn_weights</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> 
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">context_vecs</span>
 </span></code></pre></div>
-<h3 id="_3"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_3">前向过程</a></h3>
+<h2 id="_3">前向过程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><strong>索引和张量定义</strong></p>
 <ul>
 <li><span class="arithmatex">\(t_1, t_2\)</span> : Token/序列 (Sequence) 索引。 <span class="arithmatex">\(t_1\)</span> 代表查询 (Query)， <span class="arithmatex">\(t_2\)</span> 代表键/值 (Key/Value)。</li>
@@ -1279,8 +742,8 @@ y_i=C_{ijl}v_lw_j
    <span class="arithmatex">\(\displaystyle Y_{t_1 j} = A_{t_1 t_2} (X_{t_2 k} W^V_{jk})\)</span></li>
 </ol>
 <p>最终的输出 <span class="arithmatex">\(Y_{t_1 j}\)</span> 是**所有 <span class="arithmatex">\(t_2\)</span> 位置的值**（经过 <span class="arithmatex">\(W^V\)</span> 变换后）的**动态加权和**，权重 <span class="arithmatex">\(A_{t_1 t_2}\)</span> 是根据查询和键（ <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(W^Q, W^K\)</span> ）动态计算出来的。</p>
-<h3 id="_4"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_4">梯度推导</a></h3>
-<h4 id="_5"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_5">引言和符号定义</a></h4>
+<h2 id="_4">梯度推导<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_5">引言和符号定义<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>我们假设我们已经拥有了损失 <span class="arithmatex">\(L\)</span> 相对于注意力层最终输出 <span class="arithmatex">\(Y\)</span> 的梯度。我们将其定义为 <span class="arithmatex">\(G^Y\)</span> ：</p>
 <div class="arithmatex">\[G^Y_{t_1 j} = \frac{\partial L}{\partial Y_{t_1 j}}\]</div>
 <p>目标：</p>
@@ -1293,7 +756,7 @@ y_i=C_{ijl}v_lw_j
 <p>中间梯度符号：</p>
 <p>为了使推导更清晰，我们定义 <span class="arithmatex">\(G^Z = \frac{\partial L}{\partial Z}\)</span> ，表示 <span class="arithmatex">\(L\)</span> 对任意中间张量 <span class="arithmatex">\(Z\)</span> 的梯度。</p>
 <hr />
-<h5 id="1-wv-value"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#1-wv-value">第 1 部分： <span class="arithmatex">\(W^V\)</span> (Value) 的梯度推导</a></h5>
+<h4 id="1-wv-value">第 1 部分： <span class="arithmatex">\(W^V\)</span> (Value) 的梯度推导<a class="headerlink" href="#1-wv-value" title="Permanent link">&para;</a></h4>
 <p>此路径不经过 Softmax，最为直接。</p>
 <p>反向传播路径是： <span class="arithmatex">\(L \rightarrow Y \rightarrow V \rightarrow W^V\)</span> 。</p>
 <p><strong>步骤 1.1：计算 <span class="arithmatex">\(\frac{\partial L}{\partial V}\)</span> (即 <span class="arithmatex">\(G^V\)</span> )</strong></p>
@@ -1314,11 +777,11 @@ y_i=C_{ijl}v_lw_j
 - <strong>计算局部梯度：</strong> <span class="arithmatex">\(\frac{\partial V_{t_2' j'}}{\partial W^V_{jk}} = \frac{\partial (X_{t_2' k'} W^V_{j' k'})}{\partial W^V_{jk}} = X_{t_2' k} \delta_{j' j}\)</span>
 - 代回（并使用爱因斯坦约定）：</p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial L}{\partial W^V_{jk}} = G^V_{t_2 j} X_{t_2 k}\)</span></p>
-<h5 id="wv"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#wv"><span class="arithmatex">\(W^V\)</span> 梯度总结</a></h5>
+<h4 id="wv"><span class="arithmatex">\(W^V\)</span> 梯度总结<a class="headerlink" href="#wv" title="Permanent link">&para;</a></h4>
 <p>将步骤 1.1 代入 1.2，得到 <span class="arithmatex">\(W^V\)</span> 的最终梯度：</p>
 <div class="arithmatex">\[\frac{\partial L}{\partial W^V_{jk}} = (G^Y_{t_1 j} A_{t_1 t_2}) X_{t_2 k}\]</div>
 <hr />
-<h5 id="2-wq-query-wk-key"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#2-wq-query-wk-key">第 2 部分： <span class="arithmatex">\(W^Q\)</span> (Query) 和 <span class="arithmatex">\(W^K\)</span> (Key) 的梯度推导</a></h5>
+<h4 id="2-wq-query-wk-key">第 2 部分： <span class="arithmatex">\(W^Q\)</span> (Query) 和 <span class="arithmatex">\(W^K\)</span> (Key) 的梯度推导<a class="headerlink" href="#2-wq-query-wk-key" title="Permanent link">&para;</a></h4>
 <p>此路径是 <span class="arithmatex">\(L \rightarrow Y \rightarrow A \rightarrow S' \rightarrow S \rightarrow \{Q, K\} \rightarrow \{W^Q, W^K\}\)</span> 。</p>
 <p><strong>步骤 2.1：计算 <span class="arithmatex">\(\frac{\partial L}{\partial A}\)</span> (即 <span class="arithmatex">\(G^A\)</span> )</strong></p>
 <ul>
@@ -1413,7 +876,7 @@ y_i=C_{ijl}v_lw_j
 <div class="arithmatex">\[\frac{\partial L}{\partial W^K_{jk}} = (G^S_{t_1 t_2} Q_{t_1 j}) X_{t_2 k}\]</div>
 <p>其中 <span class="arithmatex">\(G^S_{t_1 t_2}\)</span> 由**步骤 2.2** 定义。</p>
 <hr />
-<h5 id="_6"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_6">最终梯度总结</a></h5>
+<h4 id="_6">最终梯度总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>以下是损失 <span class="arithmatex">\(L\)</span> 对三个权重矩阵的完整梯度，其中 <span class="arithmatex">\(G^S\)</span> 已被明确推导。</p>
 <ol>
 <li>Value 权重梯度 ( <span class="arithmatex">\(W^V\)</span> ):</li>
@@ -1436,7 +899,7 @@ y_i=C_{ijl}v_lw_j
 </blockquote>
 <p>而 <span class="arithmatex">\(\frac{\partial L}{\partial A_{t_1 t_2}}\)</span> (即 <span class="arithmatex">\(G^A\)</span> ) 定义为：</p>
 <div class="arithmatex">\[\frac{\partial L}{\partial A_{t_1 t_2}} = \frac{\partial L}{\partial Y_{t_1 j}} V_{t_2 j}\]</div>
-<h3 id="_7"><a class="toclink" href="2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_7">代码验证</a></h3>
+<h2 id="_7">代码验证<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch.testing</span> <span class="c1"># 导入测试库</span>
@@ -1567,135 +1030,83 @@ y_i=C_{ijl}v_lw_j
 </span><span id="__span-1-128"><a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"W_k 梯度计算错误:</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </span><span id="__span-1-129"><a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"--- 梯度验证完成 ---"</span><span class="p">)</span>
 </span></code></pre></div>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/Soflari.png" alt="博客主人">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-06-13 00:00:00+00:00">2025年6月13日</time></li>
-        
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="esl"><a class="toclink" href="2025/06/13/esl%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%BA%E5%B1%95%E5%BC%80%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/">ESL第五章基展开和正则化</a></h2>
-<h2 id="_1"><a class="toclink" href="2025/06/13/esl%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%BA%E5%B1%95%E5%BC%80%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/#_1">引言</a></h2>
-<p>超越线性模型的一种方式，就是通过增强输入 <span class="arithmatex">\(X\)</span> 。为 <span class="arithmatex">\(X\)</span> 赋予非线性，利用 <span class="arithmatex">\(h_{m}(X)\)</span> 张成的线性空间来讨论非线性问题，我的评价是：用非线性的砖垒一个线性的房子，来模仿非线性。（以曲代直）<br />
-“分段多项式”和“样条”用于局部多项式表示；“小波”基，用于建模信号和图像。
-各式各样的基滥用会过拟合，控制复杂度的方式有三种：</p>
-<ol>
-<li>约束方法：可加性模型通过拟合各个部分函数 <span class="arithmatex">\(f_j\)</span> 的基函数数量 <span class="arithmatex">\(M_j\)</span> 来控制复杂度（p个函数 <span class="arithmatex">\(f_j\)</span> ，每个函数对应 <span class="arithmatex">\(M_j\)</span> 个函数）</li>
-<li>选择方法：选择对拟合最有效的基函数来建模（可使用那些变量选择方案）</li>
-<li>正则化方法：岭回归、Lasso（既是正则，又是选择）</li>
-</ol>
-<h2 id="_2"><a class="toclink" href="2025/06/13/esl%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%BA%E5%B1%95%E5%BC%80%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/#_2">分段多项式与样条</a></h2>
-<p>分段常数是1阶样条，连续分段线性函数是2阶样条。以下是阶段幂基函数的广义形式：</p>
-<div class="arithmatex">\[
-h_{j}^{}\left( X \right) =X_{}^{j-1},\ j=1,...,M, \\
-h_{M+l}\left( X \right) =\left( X-\xi _l \right) _{+}^{M-1},\ l=1,...,K.
-\]</div>
-<p>上式中的 <span class="arithmatex">\(h_j(X)\)</span> 是起始点的各阶基函数， <span class="arithmatex">\(h_{M+l}(X)\)</span> 是分段后的基函数。<br />
-于是原函数可以被这些基函数线性表示，基的数量计算：<br />
-基函数个数 = (区域数) * (每区域参数个数) - (分段点个数) * (每个分段点的约束数量)，即：</p>
-<div class="arithmatex">\[
-\left( K+1 \right) \times \left( M \right) -\left( K \right) \times \left( M-1 \right) 
-\]</div>
-<p>这些固定节点的样条都称为**回归样条**，这些方法需要选择样条的阶数、节点的个数和位置。</p>
-<h2 id="rkhs"><a class="toclink" href="2025/06/13/esl%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%BA%E5%B1%95%E5%BC%80%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/#rkhs">正则化和再生核希尔伯特空间（RKHS）</a></h2>
-<p>广义的正则化问题，即使是在无穷维函数空间上，它的解依然是有限维的。
-基于正定核的问题，相关的函数空间就是RKHS</p>
-<h2 id="_3"><a class="toclink" href="2025/06/13/esl%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%BA%E5%B1%95%E5%BC%80%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/#_3">方法关系</a></h2>
-<p>多项式样条在结点变大时导致严重的舍入问题，此时可以用B-样条（B-Spline），它在结点K变大的同时保持了高效计算效率。
-多项式样条在边界上不稳定导致了外推功能较差，此时可以使用自然立方样条（Natural Cubic Spline）<br />
-多维样条分为**张量积样条**和**方差分析样条分解**。前者在特征维度较大时，计算量指数上升；后者通过指定交互阶数，将 <span class="arithmatex">\(h_m(x)h_n(y)\)</span> 变为 <span class="arithmatex">\(h(x,y)\)</span> ，减少了计算量。
-多维样条是平滑样条的多维扩展<br />
-方差样条分解是多维样条的扩展<br />
-当潜在特征数量较大时，自动方法更可取，MARS（多元自适应回归样条）和MART（多重加法回归树）方法</p>
-<blockquote>
-<p>树方法也是样条方法的一种，这值得思考，我认为树方法主要是在基函数上有不同</p>
-</blockquote>
-<p>基函数：<strong>截断幂基</strong>、<strong>自然立方样条</strong>、<strong>B-样条</strong>、<strong>光滑样条</strong>（局部多项式表示，便于无穷维空间内积），<strong>高斯径向基</strong>（全局表示，但随距离衰减），<strong>小波基</strong>（严格局部且多分辨率）</p>
-<blockquote>
-<p>选择多项式样条，当你认为数据的底层行为是分段变化的，并且你想在不同区域使用不同的简单模型时。
-选择高斯RBF，当你需要拟合一个整体上非常平滑但高度非线性的函数，并且数据点之间的距离是关键信息时。
-选择小波基，当你的数据（或函数）在不同位置表现出不同尺度的特征时，尤其是包含大量平滑区域和少数尖锐变化（如信号处理、图像压缩和金融时间序列分析）的场景。小波能够自适应地在需要的地方提供更高的分辨率，这是其无与伦比的优势。</p>
-</blockquote>
-<p>!!! tips 小波对图像的分解，是否能用于多分辨率扩散去噪模型？
-有待探索</p>
-    
-    
-  </div>
-</article>
-      
-        <article class="md-post md-post--excerpt">
-  <header class="md-post__header">
-    
-      <nav class="md-post__authors md-typeset">
-        
-          <span class="md-author">
-            <img src="https://github.com/Soflari.png" alt="博客主人">
-          </span>
-        
-      </nav>
-    
-    <div class="md-post__meta md-meta">
-      <ul class="md-meta__list">
-        <li class="md-meta__item">
-          <time datetime="2025-06-12 00:00:00+00:00">2025年6月12日</time></li>
-        
-        
-        
-      </ul>
-      
-    </div>
-  </header>
-  <div class="md-post__content md-typeset">
-    <h2 id="_1"><a class="toclink" href="2025/06/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E7%AC%94%E8%AE%B0/">深度学习理论笔记</a></h2>
-<p>梯度下降对于线性可分数据和线性不可分数据的隐性偏置描述是不同的</p>
-<h4 id="931"><a class="toclink" href="2025/06/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%90%86%E8%AE%BA%E7%AC%94%E8%AE%B0/#931">定理 9.3.1</a></h4>
-<p>对于几乎所有的线性可分数据集，采用梯度下降法进行更新，其中初始化权重 <span class="arithmatex">\(w_0\)</span> 和步长的选择都旨在最小化指数损失：</p>
-<div class="arithmatex">\[
-L(w) = \sum_{i=1}^{n} \exp\left(-y^{(i)} w^T x^{(i)}\right)
-\]</div>
-<p>即， <span class="arithmatex">\(L(w_t) \to 0\)</span> 。梯度下降法的迭代过程最终会收敛至 <span class="arithmatex">\(l_2\)</span> 最大间隔向量的方向，即 <span class="arithmatex">\(\lim_{t \to \infty} \frac{w_t}{||w_t||_2} = \frac{\hat{w}}{||\hat{w}||_2}\)</span> ，此处的 <span class="arithmatex">\(\hat{w}\)</span> 为：</p>
-<div class="arithmatex">\[
-\hat{w} = \underset{w}{\arg\min} \, ||w||_2^2 \quad \text{s.t.} \quad \forall i, \, y^{(i)} w^T x^{(i)} \ge 1
-\]</div>
-<p>不失一般性，假设 <span class="arithmatex">\(\forall i, y^{(i)} = 1\)</span> 作为线性模型的符号，因为该符号可以被合并到 <span class="arithmatex">\(x^{(i)}\)</span> 中。</p>
-    
-    
-  </div>
-</article>
-      
-      
-        
-          
 
 
 
-<nav class="md-pagination">
+
+
+
+
   
-</nav>
-        
+  
+
+
+
+
+  
+
+
+
+  <h2 id="__comments">评论</h2>
+
+  <!-- giscus 评论区：数据存在 GitHub Discussions（Soflari/blog 仓库 Announcements 分类） -->
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="Soflari/blog"
+    data-repo-id="R_kgDOUQJKrg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOUQJKrs4DE_-5"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  >
+  </script>
+
+  <!-- 评论主题跟随站点亮暗色切换 -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    // Set palette on initial load
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate"
+        ? "transparent_dark"
+        : "light"
+
+      // Instruct Giscus to set theme
+      giscus.setAttribute("data-theme", theme)
+    }
+
+    // Register event handlers after documented loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate"
+            ? "transparent_dark"
+            : "light"
+
+          // Instruct Giscus to change theme
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
       
-    </div>
+    </article>
   </div>
 
           
@@ -1714,10 +1125,12 @@ L(w) = \sum_{i=1}^{n} \exp\left(-y^{(i)} w^T x^{(i)}\right)
   
     
       
+        
+      
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="上一页: 首页">
+          <a href="../../../06/13/esl%E7%AC%AC%E4%BA%94%E7%AB%A0%E5%9F%BA%E5%B1%95%E5%BC%80%E5%92%8C%E6%AD%A3%E5%88%99%E5%8C%96/" class="md-footer__link md-footer__link--prev" aria-label="上一页: ESL第五章基展开和正则化">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1727,20 +1140,20 @@ L(w) = \sum_{i=1}^{n} \exp\left(-y^{(i)} w^T x^{(i)}\right)
                 上一页
               </span>
               <div class="md-ellipsis">
-                首页
+                ESL第五章基展开和正则化
               </div>
             </div>
           </a>
         
         
           
-          <a href="category/%E5%85%AC%E5%91%8A/" class="md-footer__link md-footer__link--next" aria-label="下一页: 公告">
+          <a href="../../17/%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/" class="md-footer__link md-footer__link--next" aria-label="下一页: 卷积模块的张量表示及梯度推导">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                公告
+                卷积模块的张量表示及梯度推导
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1777,12 +1190,12 @@ L(w) = \sum_{i=1}^{n} \exp\left(-y^{(i)} w^T x^{(i)}\right)
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../javascripts/mathjax.js"></script>
+        <script src="../../../../../javascripts/mathjax.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://soflari.github.io/blog/blog/2026/09/06/hello-world/">
+        <link rel="canonical" href="https://soflari.github.io/blog/blog/2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/">
       
       
-        <link rel="prev" href="../markdown-guide/">
+        <link rel="prev" href="../%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/">
       
+      
+        <link rel="next" href="../../../../2026/09/06/markdown-guide/">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>你好，世界 - 我的博客</title>
+        <title>MLP的张量表示及梯度推导 - 我的博客</title>
       
     
     
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#mlp" class="md-skip">
           跳转至
         </a>
       
@@ -112,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              你好，世界
+              MLP的张量表示及梯度推导
             
           </span>
         </div>
@@ -605,10 +607,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代码部分
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        文章放在哪里
+        神经网络的结构
       
     </span>
   </a>
@@ -619,21 +632,38 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        文章开头的元数据
+        推导梯度
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="推导梯度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        交叉熵部分梯度
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        公式演示
+        单个线性层梯度
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -693,20 +723,10 @@
                     <li class="md-nav__item">
                       <div class="md-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
-                        <time datetime="2026-09-06 00:00:00+00:00" class="md-ellipsis">2026年9月6日</time>
+                        <time datetime="2025-11-17 00:00:00+00:00" class="md-ellipsis">2025年11月17日</time>
                       </div>
                     </li>
                     
-                    
-                      <li class="md-nav__item">
-                        <div class="md-nav__link">
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
-                          <span class="md-ellipsis">
-                            分类于
-                            
-                              <a href="../../../../category/%E5%85%AC%E5%91%8A/">公告</a></span>
-                        </div>
-                      </li>
                     
                     
                   </ul>
@@ -725,50 +745,138 @@
   
 
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">开始</span>
-      
-    
-  </nav>
 
 
-
-<h1 id="_1">你好，世界<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>这是本博客的第一篇示例文章，用来说明文章的基本写法。写正式文章时可以直接把它替换掉。</p>
-<h2 id="_2">文章放在哪里<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>所有文章放在 <code>docs/blog/posts/</code> 目录下，文件名建议用「日期-标题缩写」的格式，例如：</p>
-<div class="highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docs/blog/posts/2026-09-06-hello-world.md
+<h1 id="mlp">MLP的张量表示及梯度推导<a class="headerlink" href="#mlp" title="Permanent link">&para;</a></h1>
+<h2 id="_1">代码部分<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>这是多层感知机（MLP）的一段示例代码</p>
+<div class="highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">NeuralNetwork</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">()</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_relu_stack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="k">return</span> <span class="n">logits</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="n">model</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="n">pred_probab</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">logits</span><span class="p">)</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pred_probab</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></code></pre></div>
-<h2 id="_3">文章开头的元数据<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>每篇文章顶部有一段 YAML「front matter」，用来声明日期、分类、标签和作者：</p>
-<div class="highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nn">---</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-09-06</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">categories</span><span class="p">:</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">公告</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">tags</span><span class="p">:</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">开始</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nt">authors</span><span class="p">:</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">me</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nn">---</span>
-</span></code></pre></div>
+<h2 id="_2">神经网络的结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ol>
+<li><code>nn.Flatten()</code>
+   这个函数将输入张量的各维度展平成一个向量。默认从索引1开始到索引-1结束，要注意的是索引是从0开始的，所以索引1其实是指的第2个。
+   这里的输入X维度为 <span class="arithmatex">\([1,28,28]\)</span> ，经过<code>nn.Flatten()</code>后应该是 <span class="arithmatex">\([1,28*28]\)</span> 。
+   从张量角度看，</li>
+</ol>
+<p><span class="arithmatex">\(\displaystyle x_{b1ij}=x_{bn}, \quad n=0*28*28+i*28+j\)</span>
+2. <code>linear_relu_stack</code>
+   这个函数将一系列的神经层排成一个列表，数据将从这些层中流出。过程中会改变维度。</p>
+<ol>
+<li><code>Linear(28*28, 512)</code>
+张量表示: <span class="arithmatex">\(y_{bm}=x_{bn}w_{nm}+\mathbf{1}_{b}b_{m}\)</span></li>
+<li><code>ReLU</code>
+张量表示: <span class="arithmatex">\(y_{bm}^{r}=\text{ReLU}(y_{bm})\)</span></li>
+<li><code>Linear(512,512)</code>
+张量表示: <span class="arithmatex">\(y_{bm'}'=y_{bm}^{r}w_{mm'}+\mathbf{1}_{b}b_{m'}\)</span></li>
+<li><code>ReLU</code>
+张量表示: <span class="arithmatex">\(y_{bm'}^{r}=\text{ReLU}(y_{bm'})\)</span></li>
+<li><code>Linear(512,10)</code>
+张量表示: <span class="arithmatex">\(y_{bo}=y_{bm'}^{r}w_{m'o}+\mathbf{1}_{b}b_{o}\)</span></li>
+<li><code>Softmax(dim=1)</code>
+   张量表示：</li>
+</ol>
+<p><span class="arithmatex">\(\displaystyle s_{bi}= \frac{e^{x_{bi}}}{\mathbf{1}_{kj}e^{x_{kj}}}\)</span>
+4. 交叉熵损失</p>
+<p><span class="arithmatex">\(\displaystyle c_{b}=-\log{s_{b\text{T}}}\)</span></p>
+<p>交叉熵损失是单分类损失函数，这里的 <span class="arithmatex">\(\text{T}\)</span> 是代表真实标签的常量索引，这里的 <span class="arithmatex">\(\text{T}\)</span> 不是一种哑指标。</p>
+<h2 id="_3">推导梯度<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4">交叉熵部分梯度<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>重点是利用反向传播，也就是由终点向起点一层层推。</p>
+<ol>
+<li><span class="arithmatex">\(c_{b}\)</span>
+   <span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial s_{ki}}=-\frac{\partial \log s_{b\text{T}}}{\partial s_{ki}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}\)</span></li>
+<li><span class="arithmatex">\(s_{bi}\)</span>
+   <span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =\frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}}\)</span>
+   令 <span class="arithmatex">\(\sigma=\mathbf{1}_{kj}e^{x_{kj}}\)</span> ,
+   <span class="arithmatex">\(\displaystyle \frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}} =\frac{\partial\sigma}{\partial y_{ko}} =\frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}})\)</span></li>
+<li><span class="arithmatex">\(\frac{\partial e^{y_{bi}}}{\partial y_{ko}}\)</span>
+<span class="arithmatex">\(\displaystyle \frac{\partial e^{y_{bi}}}{\partial y_{ko}} =e^{y_{bi}}\frac{\partial y_{bi}}{\partial y_{ko}} =e^{y_{bi}}\delta_{bk}\delta_{io}\)</span></li>
+<li><span class="arithmatex">\(\frac{\partial \sigma}{\partial y_{ko}}\)</span>
+<span class="arithmatex">\(\displaystyle \frac{\partial \sigma}{\partial y_{ko}}=\frac{\partial \mathbf{1}_{bj}e^{y_{bj}}}{\partial y_{ko}} =\mathbf{1}_{bj}e^{y_{bj}}\delta_{bk}\delta_{jo}=\mathbf{1}_{ko}e^{y_{ko}} =e^{y_{ko}}\)</span>
+代入原式：
+<span class="arithmatex">\(\displaystyle \frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}}) =\frac{1}{\sigma^2}( e^{y_{bi}}\delta_{bk}\delta_{io}\sigma-e^{y_{bi}}e^{y_{ko}}) =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span>
+即
+<span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span>
+综合一下，现在就有
+<span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial y_{ko}} =\frac{\partial c_{b}}{\partial s_{ki}}\frac{\partial s_{bi}}{\partial y_{ko}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}(s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}) =s_{ko}-\delta_{bk}\delta_{To}\)</span>
+这里可以看出，交叉熵损失在最后一层的梯度，恰好等于第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(o\)</span> 个logits(概率值)减去第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(\text{T}\)</span> 个标签(也就是1).</li>
+</ol>
+<h3 id="_5">单个线性层梯度<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>date</code>：发布日期，博客首页按它倒序排列</li>
-<li><code>categories</code>：分类，出现在归档与分类视图</li>
-<li><code>tags</code>：标签，点击可跳到同标签文章列表</li>
-<li><code>authors</code>：作者，对应 <code>docs/blog/.authors.yml</code> 里定义的条目</li>
+<li>输入  <span class="arithmatex">\(X\)</span> : (∗, in_features)</li>
+<li>权重 <span class="arithmatex">\(A\)</span>  : (out_features,in_features)</li>
+<li>偏置  <span class="arithmatex">\(b\)</span> : (out_features)</li>
+<li>输出  <span class="arithmatex">\(Y\)</span> : (∗, out_features)</li>
 </ul>
-<h2 id="_4">公式演示<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>行内公式这样写：<span class="arithmatex">\(e^{i\pi} + 1 = 0\)</span>。</p>
-<p>块级公式这样写：</p>
+<p>PyTorch对线性层的定义：</p>
 <div class="arithmatex">\[
-\hat{\theta} = \arg\min_{\theta} \sum_{i=1}^{n} \left( y_i - f_\theta(x_i) \right)^2
+Y=XA^{T}+b
 \]</div>
-<p>更多写法（代码块、提示框、表格、选项卡等）见下一篇文章《写作语法指南》。</p>
+<p>令 <span class="arithmatex">\(C=A^{T}\)</span> ，就有张量表示：</p>
+<div class="arithmatex">\[
+y_{ij}=x_{ik}c_{kj}+\mathbf{1}_{i}b_{j}
+\]</div>
+<p>上式中， <span class="arithmatex">\(k\)</span> 重复出现代表做了乘积，同时在等式左侧未出现，就还做了求和。 <span class="arithmatex">\(\mathbf{1}_{i}\)</span> 用于将 <span class="arithmatex">\(b_{j}\)</span> 广播成矩阵。</p>
+<p>根据 <a href="https://robotchinwag.com/posts/linear-layer-deriving-the-gradient-for-the-backward-pass/">Linear Layer, Deriving the Gradient for the Backward Pass</a> 的结果，我们有如下结论：</p>
+<ol>
+<li>对 <span class="arithmatex">\(X\)</span> 的梯度
+   <span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial x_{pq}}=\delta_{ip}c_{qj}\)</span></li>
+</ol>
+<div class="arithmatex">\[\begin{aligned}
+\frac{\partial l}{\partial x_{pq}} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial x_{pq}} \\
+ &amp; =\frac{\partial l}{\partial y_{ij}}\delta_{ip}c_{qj} \\
+ &amp; =\frac{\partial l}{\partial y_{pj}}c_{qj}
+\end{aligned}\]</div>
+<ol>
+<li>对 <span class="arithmatex">\(A\)</span> 的梯度</li>
+</ol>
+<div class="arithmatex">\[\begin{aligned}
+    \frac{\partial y_{ij}}{\partial a_{pq}} &amp; =\frac{\partial}{\partial a_{pq}}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\
+     &amp; =x_{ik}\frac{\partial c_{kj}}{\partial a_{pq}}
+    \end{aligned}\]</div>
+<p>由于 <span class="arithmatex">\(C=A^{T}\)</span> ， 所以有 <span class="arithmatex">\(c_{kj}=a_{jk}\)</span> 。继续有公式：</p>
+<div class="arithmatex">\[\begin{aligned}
+    \frac{\partial y_{ij}}{\partial a_{pq}} &amp; =x_{ik}\frac{\partial a_{jk}}{\partial a_{pq}} \\
+     &amp; =x_{ik}\delta_{jp}\delta_{kq} \\
+     &amp; =x_{iq}\delta_{jp}
+    \end{aligned}\]</div>
+<div class="arithmatex">\[\begin{aligned}
+    \frac{\partial l}{\partial a_{pq}} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial a_{pq}} \\
+     &amp; =\frac{\partial l}{\partial y_{ij}}x_{iq}\delta_{jp} \\
+     &amp; =\frac{\partial l}{\partial y_{ip}}x_{iq}
+    \end{aligned}\]</div>
+<ol>
+<li>对 <span class="arithmatex">\(b\)</span> 的梯度
+   <span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial y_{ij}}{\partial b_p} &amp; =\frac{\partial}{\partial b_p}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\ &amp; =\frac{\partial\left(\mathbf{1}_ib_j\right)}{\partial b_p} \\ &amp; =1_i\frac{\partial b_j}{\partial b_p} \end{aligned}\)</span>
+   <span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial b_p}=\mathbf{1}_i\delta_{jp}\)</span>
+   <span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial l}{\partial b_p} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial b_p} \\ &amp; =\frac{\partial l}{\partial y_{ij}}\mathbf{1}_i\delta_{jp} \\ &amp; =\frac{\partial l}{\partial y_{ip}}\mathbf{1}_i \end{aligned}\)</span></li>
+</ol>
 
 
 
@@ -869,7 +977,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../markdown-guide/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 写作语法指南">
+          <a href="../%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 卷积模块的张量表示及梯度推导">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -879,11 +987,27 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                写作语法指南
+                卷积模块的张量表示及梯度推导
               </div>
             </div>
           </a>
         
+        
+          
+          <a href="../../../../2026/09/06/markdown-guide/" class="md-footer__link md-footer__link--next" aria-label="下一页: 写作语法指南">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                写作语法指南
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
