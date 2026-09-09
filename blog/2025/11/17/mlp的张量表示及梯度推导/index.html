@@ -53,6 +53,8 @@
       
     
     
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -784,12 +786,16 @@
    这里的输入X维度为 <span class="arithmatex">\([1,28,28]\)</span> ，经过<code>nn.Flatten()</code>后应该是 <span class="arithmatex">\([1,28*28]\)</span> 。
    从张量角度看，</li>
 </ol>
-<p><span class="arithmatex">\(\displaystyle x_{b1ij}=x_{bn}, \quad n=0*28*28+i*28+j\)</span>
-2. <code>linear_relu_stack</code>
-   这个函数将一系列的神经层排成一个列表，数据将从这些层中流出。过程中会改变维度。</p>
+<p><span class="arithmatex">\(\displaystyle x_{b1ij}=x_{bn}, \quad n=0*28*28+i*28+j\)</span></p>
 <ol>
-<li><code>Linear(28*28, 512)</code>
-张量表示: <span class="arithmatex">\(y_{bm}=x_{bn}w_{nm}+\mathbf{1}_{b}b_{m}\)</span></li>
+<li>
+<p><code>linear_relu_stack</code>
+   这个函数将一系列的神经层排成一个列表，数据将从这些层中流出。过程中会改变维度。</p>
+</li>
+<li>
+<p><code>Linear(28*28, 512)</code>
+张量表示: <span class="arithmatex">\(y_{bm}=x_{bn}w_{nm}+\mathbf{1}_{b}b_{m}\)</span></p>
+</li>
 <li><code>ReLU</code>
 张量表示: <span class="arithmatex">\(y_{bm}^{r}=\text{ReLU}(y_{bm})\)</span></li>
 <li><code>Linear(512,512)</code>
@@ -801,32 +807,40 @@
 <li><code>Softmax(dim=1)</code>
    张量表示：</li>
 </ol>
-<p><span class="arithmatex">\(\displaystyle s_{bi}= \frac{e^{x_{bi}}}{\mathbf{1}_{kj}e^{x_{kj}}}\)</span>
-4. 交叉熵损失</p>
+<p><span class="arithmatex">\(\displaystyle s_{bi}= \frac{e^{x_{bi}}}{\mathbf{1}_{kj}e^{x_{kj}}}\)</span></p>
+<ol>
+<li>交叉熵损失</li>
+</ol>
 <p><span class="arithmatex">\(\displaystyle c_{b}=-\log{s_{b\text{T}}}\)</span></p>
 <p>交叉熵损失是单分类损失函数，这里的 <span class="arithmatex">\(\text{T}\)</span> 是代表真实标签的常量索引，这里的 <span class="arithmatex">\(\text{T}\)</span> 不是一种哑指标。</p>
 <h2 id="_3">推导梯度<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="_4">交叉熵部分梯度<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>重点是利用反向传播，也就是由终点向起点一层层推。</p>
 <ol>
-<li><span class="arithmatex">\(c_{b}\)</span>
-   <span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial s_{ki}}=-\frac{\partial \log s_{b\text{T}}}{\partial s_{ki}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}\)</span></li>
-<li><span class="arithmatex">\(s_{bi}\)</span>
-   <span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =\frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}}\)</span>
-   令 <span class="arithmatex">\(\sigma=\mathbf{1}_{kj}e^{x_{kj}}\)</span> ,
-   <span class="arithmatex">\(\displaystyle \frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}} =\frac{\partial\sigma}{\partial y_{ko}} =\frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}})\)</span></li>
-<li><span class="arithmatex">\(\frac{\partial e^{y_{bi}}}{\partial y_{ko}}\)</span>
-<span class="arithmatex">\(\displaystyle \frac{\partial e^{y_{bi}}}{\partial y_{ko}} =e^{y_{bi}}\frac{\partial y_{bi}}{\partial y_{ko}} =e^{y_{bi}}\delta_{bk}\delta_{io}\)</span></li>
-<li><span class="arithmatex">\(\frac{\partial \sigma}{\partial y_{ko}}\)</span>
-<span class="arithmatex">\(\displaystyle \frac{\partial \sigma}{\partial y_{ko}}=\frac{\partial \mathbf{1}_{bj}e^{y_{bj}}}{\partial y_{ko}} =\mathbf{1}_{bj}e^{y_{bj}}\delta_{bk}\delta_{jo}=\mathbf{1}_{ko}e^{y_{ko}} =e^{y_{ko}}\)</span>
-代入原式：
-<span class="arithmatex">\(\displaystyle \frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}}) =\frac{1}{\sigma^2}( e^{y_{bi}}\delta_{bk}\delta_{io}\sigma-e^{y_{bi}}e^{y_{ko}}) =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span>
-即
-<span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span>
-综合一下，现在就有
-<span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial y_{ko}} =\frac{\partial c_{b}}{\partial s_{ki}}\frac{\partial s_{bi}}{\partial y_{ko}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}(s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}) =s_{ko}-\delta_{bk}\delta_{To}\)</span>
-这里可以看出，交叉熵损失在最后一层的梯度，恰好等于第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(o\)</span> 个logits(概率值)减去第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(\text{T}\)</span> 个标签(也就是1).</li>
+<li><span class="arithmatex">\(c_{b}\)</span></li>
 </ol>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial s_{ki}}=-\frac{\partial \log s_{b\text{T}}}{\partial s_{ki}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}\)</span></p>
+<ol>
+<li><span class="arithmatex">\(s_{bi}\)</span></li>
+</ol>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =\frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}}\)</span></p>
+<p>令 <span class="arithmatex">\(\sigma=\mathbf{1}_{kj}e^{x_{kj}}\)</span> ,</p>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}} =\frac{\partial\sigma}{\partial y_{ko}} =\frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}})\)</span></p>
+<ol>
+<li><span class="arithmatex">\(\frac{\partial e^{y_{bi}}}{\partial y_{ko}}\)</span></li>
+</ol>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial e^{y_{bi}}}{\partial y_{ko}} =e^{y_{bi}}\frac{\partial y_{bi}}{\partial y_{ko}} =e^{y_{bi}}\delta_{bk}\delta_{io}\)</span></p>
+<ol>
+<li><span class="arithmatex">\(\frac{\partial \sigma}{\partial y_{ko}}\)</span></li>
+</ol>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial \sigma}{\partial y_{ko}}=\frac{\partial \mathbf{1}_{bj}e^{y_{bj}}}{\partial y_{ko}} =\mathbf{1}_{bj}e^{y_{bj}}\delta_{bk}\delta_{jo}=\mathbf{1}_{ko}e^{y_{ko}} =e^{y_{ko}}\)</span></p>
+<p>代入原式：</p>
+<p><span class="arithmatex">\(\displaystyle \frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}}) =\frac{1}{\sigma^2}( e^{y_{bi}}\delta_{bk}\delta_{io}\sigma-e^{y_{bi}}e^{y_{ko}}) =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span></p>
+<p>即</p>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span></p>
+<p>综合一下，现在就有</p>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial y_{ko}} =\frac{\partial c_{b}}{\partial s_{ki}}\frac{\partial s_{bi}}{\partial y_{ko}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}(s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}) =s_{ko}-\delta_{bk}\delta_{To}\)</span></p>
+<p>这里可以看出，交叉熵损失在最后一层的梯度，恰好等于第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(o\)</span> 个logits(概率值)减去第 <span class="arithmatex">\(k\)</span> 个样本的第 <span class="arithmatex">\(\text{T}\)</span> 个标签(也就是1).</p>
 <h3 id="_5">单个线性层梯度<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <ul>
 <li>输入  <span class="arithmatex">\(X\)</span> : (∗, in_features)</li>
@@ -845,9 +859,9 @@ y_{ij}=x_{ik}c_{kj}+\mathbf{1}_{i}b_{j}
 <p>上式中， <span class="arithmatex">\(k\)</span> 重复出现代表做了乘积，同时在等式左侧未出现，就还做了求和。 <span class="arithmatex">\(\mathbf{1}_{i}\)</span> 用于将 <span class="arithmatex">\(b_{j}\)</span> 广播成矩阵。</p>
 <p>根据 <a href="https://robotchinwag.com/posts/linear-layer-deriving-the-gradient-for-the-backward-pass/">Linear Layer, Deriving the Gradient for the Backward Pass</a> 的结果，我们有如下结论：</p>
 <ol>
-<li>对 <span class="arithmatex">\(X\)</span> 的梯度
-   <span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial x_{pq}}=\delta_{ip}c_{qj}\)</span></li>
+<li>对 <span class="arithmatex">\(X\)</span> 的梯度</li>
 </ol>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial x_{pq}}=\delta_{ip}c_{qj}\)</span></p>
 <div class="arithmatex">\[\begin{aligned}
 \frac{\partial l}{\partial x_{pq}} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial x_{pq}} \\
  &amp; =\frac{\partial l}{\partial y_{ij}}\delta_{ip}c_{qj} \\
@@ -872,11 +886,11 @@ y_{ij}=x_{ik}c_{kj}+\mathbf{1}_{i}b_{j}
      &amp; =\frac{\partial l}{\partial y_{ip}}x_{iq}
     \end{aligned}\]</div>
 <ol>
-<li>对 <span class="arithmatex">\(b\)</span> 的梯度
-   <span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial y_{ij}}{\partial b_p} &amp; =\frac{\partial}{\partial b_p}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\ &amp; =\frac{\partial\left(\mathbf{1}_ib_j\right)}{\partial b_p} \\ &amp; =1_i\frac{\partial b_j}{\partial b_p} \end{aligned}\)</span>
-   <span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial b_p}=\mathbf{1}_i\delta_{jp}\)</span>
-   <span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial l}{\partial b_p} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial b_p} \\ &amp; =\frac{\partial l}{\partial y_{ij}}\mathbf{1}_i\delta_{jp} \\ &amp; =\frac{\partial l}{\partial y_{ip}}\mathbf{1}_i \end{aligned}\)</span></li>
+<li>对 <span class="arithmatex">\(b\)</span> 的梯度</li>
 </ol>
+<p><span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial y_{ij}}{\partial b_p} &amp; =\frac{\partial}{\partial b_p}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\ &amp; =\frac{\partial\left(\mathbf{1}_ib_j\right)}{\partial b_p} \\ &amp; =1_i\frac{\partial b_j}{\partial b_p} \end{aligned}\)</span></p>
+<p><span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial b_p}=\mathbf{1}_i\delta_{jp}\)</span></p>
+<p><span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial l}{\partial b_p} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial b_p} \\ &amp; =\frac{\partial l}{\partial y_{ij}}\mathbf{1}_i\delta_{jp} \\ &amp; =\frac{\partial l}{\partial y_{ip}}\mathbf{1}_i \end{aligned}\)</span></p>
 
 
 

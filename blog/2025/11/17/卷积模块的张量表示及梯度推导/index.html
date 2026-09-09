@@ -53,6 +53,8 @@
       
     
     
+      <link rel="stylesheet" href="../../../../../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -893,19 +895,21 @@ y_i=C_{ijl}v_lw_j
 <li>令核张量为 <span class="arithmatex">\(w\)</span> ，其分量为 <span class="arithmatex">\(w_{cd}\)</span> 。</li>
 <li>令 <span class="arithmatex">\((\star 2D)\)</span> 卷积张量为 <span class="arithmatex">\(C\)</span> ，其分量为 <span class="arithmatex">\(C_{abcdef}\)</span> 。</li>
 <li><strong>张量缩并（爱因斯坦求和形式）：</strong>
-   完整的 2D 卷积操作（类似于 1D 情况）可以写为：
-   <span class="arithmatex">\(\displaystyle y_{ab} = \sum_{c,d} \sum_{e,f} C_{abcdef} \cdot v_{ef} \cdot w_{cd}\)</span>
-   使用爱因斯坦求和约定（省略 <span class="arithmatex">\(\sum\)</span> 符号），我们得到一个非常简洁的张量形式：
-   <span class="arithmatex">\(\displaystyle y_{ab} = C_{abcdef} v_{ef} w_{cd}\)</span></li>
+   完整的 2D 卷积操作（类似于 1D 情况）可以写为：</li>
+</ul>
+<p><span class="arithmatex">\(\displaystyle y_{ab} = \sum_{c,d} \sum_{e,f} C_{abcdef} \cdot v_{ef} \cdot w_{cd}\)</span></p>
+<p>使用爱因斯坦求和约定（省略 <span class="arithmatex">\(\sum\)</span> 符号），我们得到一个非常简洁的张量形式：</p>
+<p><span class="arithmatex">\(\displaystyle y_{ab} = C_{abcdef} v_{ef} w_{cd}\)</span></p>
+<ul>
 <li><span class="arithmatex">\(a, b\)</span> 是**自由索引**，代表输出张量的维度。</li>
 <li><span class="arithmatex">\(c, d, e, f\)</span> 是**哑索引（缩并索引）**，因为它们在右侧重复出现，表示需要对它们的所有可能值求和。</li>
 <li><strong>六阶卷积张量 <span class="arithmatex">\(C\)</span> 的定义：</strong>
-   这个六阶张量 <span class="arithmatex">\(C_{abcdef}\)</span> 的定义即是图像中 <span class="arithmatex">\((\star 2D)\)</span> 的定义：
-   <span class="arithmatex">\(\displaystyle C_{abcdef} = \begin{cases} 1, &amp; \text{if } (e, f) = (a, b) + (c, d) \\ 0, &amp; \text{else} \end{cases}\)</span>
-   这等价于两个独立的条件必须同时满足：</li>
-<li><span class="arithmatex">\(e = a + c\)</span></li>
-<li><span class="arithmatex">\(f = b + d\)</span></li>
+   这个六阶张量 <span class="arithmatex">\(C_{abcdef}\)</span> 的定义即是图像中 <span class="arithmatex">\((\star 2D)\)</span> 的定义：</li>
 </ul>
+<p><span class="arithmatex">\(\displaystyle C_{abcdef} = \begin{cases} 1, &amp; \text{if } (e, f) = (a, b) + (c, d) \\ 0, &amp; \text{else} \end{cases}\)</span></p>
+<p>这等价于两个独立的条件必须同时满足：
+   - <span class="arithmatex">\(e = a + c\)</span>
+   - <span class="arithmatex">\(f = b + d\)</span></p>
 <p><strong>验证</strong>
 这种形式再次等价于标准的 2D 卷积。如果我们从 <span class="arithmatex">\(y_{ab} = \sum_{c,d} \sum_{e,f} C_{abcdef} v_{ef} w_{cd}\)</span> 开始：</p>
 <ol>
@@ -921,20 +925,20 @@ y_i=C_{ijl}v_lw_j
 </li>
 <li>
 <p><strong>张量缩并 (爱因斯坦求和形式):</strong>
-   整个 2D 卷积操作（包含通道）可以写为：
-   <span class="arithmatex">\(\displaystyle y_{ab} = C_{abcdef} v_{ef} w_{cd}\)</span></p>
+   整个 2D 卷积操作（包含通道）可以写为：</p>
 </li>
+</ul>
+<p><span class="arithmatex">\(\displaystyle y_{ab} = C_{abcdef} v_{ef} w_{cd}\)</span></p>
+<ul>
 <li><span class="arithmatex">\(a, b\)</span> 是**自由索引**，定义了我们正在计算的输出张量的分量。</li>
 <li><span class="arithmatex">\(c, d, e, f\)</span> 是**哑索引**，表示我们需要对这些索引的所有可能值求和。</li>
-<li>
-<p><strong>六阶卷积张量 <span class="arithmatex">\(C\)</span> 的定义:</strong>
-   这个六阶张量 <span class="arithmatex">\(C\)</span> 包含了所有关于步幅和扩张的**结构信息**。其分量 <span class="arithmatex">\(C_{abcdef}\)</span> 定义如下：
-   <span class="arithmatex">\(\displaystyle C_{abcdef} = \begin{cases} 1, &amp; \text{if } (e = s_0 \cdot a + d_0 \cdot c) \quad \textbf{and} \quad (f = s_1 \cdot b + d_1 \cdot d) \\ 0, &amp; \text{else} \end{cases}\)</span>
-   这个定义非常清晰地展示了 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(d\)</span> 是如何分别作用于不同维度的：</p>
-</li>
-<li>
-<p><span class="arithmatex">\(s_0, d_0\)</span> 掌控着第 0 维 (索引 <span class="arithmatex">\(a, c, e\)</span> ) 的映射关系。</p>
-</li>
+<li><strong>六阶卷积张量 <span class="arithmatex">\(C\)</span> 的定义:</strong>
+   这个六阶张量 <span class="arithmatex">\(C\)</span> 包含了所有关于步幅和扩张的**结构信息**。其分量 <span class="arithmatex">\(C_{abcdef}\)</span> 定义如下：</li>
+</ul>
+<p><span class="arithmatex">\(\displaystyle C_{abcdef} = \begin{cases} 1, &amp; \text{if } (e = s_0 \cdot a + d_0 \cdot c) \quad \textbf{and} \quad (f = s_1 \cdot b + d_1 \cdot d) \\ 0, &amp; \text{else} \end{cases}\)</span></p>
+<p>这个定义非常清晰地展示了 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(d\)</span> 是如何分别作用于不同维度的：</p>
+<ul>
+<li><span class="arithmatex">\(s_0, d_0\)</span> 掌控着第 0 维 (索引 <span class="arithmatex">\(a, c, e\)</span> ) 的映射关系。</li>
 <li><span class="arithmatex">\(s_1, d_1\)</span> 掌控着第 1 维 (索引 <span class="arithmatex">\(b, d, f\)</span> ) 的映射关系。</li>
 </ul>
 
