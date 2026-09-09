@@ -713,41 +713,31 @@
 <li><strong>Output <span class="arithmatex">\(Y\)</span> :</strong> <span class="arithmatex">\(Y_{t_1 j}\)</span> (对应 <code>context_vecs</code>)</li>
 </ul>
 <hr />
-<ol>
-<li><strong><code>q, k, v</code> 的计算 (线性)</strong>
-   这是输入 <span class="arithmatex">\(X\)</span> 和权重矩阵之间的张量缩并（矩阵乘法）。</li>
-<li><strong>Query:</strong> <span class="arithmatex">\(Q_{t_1 j} = X_{t_1 i} W^Q_{ji}\)</span></li>
-<li><strong>Key:</strong> <span class="arithmatex">\(K_{t_2 j} = X_{t_2 k} W^K_{jk}\)</span></li>
-<li><strong>Value:</strong> <span class="arithmatex">\(V_{t_2 j} = X_{t_2 k} W^V_{jk}\)</span>
-（在爱因斯坦约定中，重复的索引 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(k\)</span> 表示在 <span class="arithmatex">\(d\_in\)</span> 维度上求和。）</li>
-<li><strong><code>attn_scores</code> 的计算 (线性)</strong>
-   <code>attn_scores = torch.matmul(q, k.T)</code>。这是一个矩阵乘法，它在 <span class="arithmatex">\(j\)</span> (即 <span class="arithmatex">\(d\_out\)</span> ) 维度上进行缩并。</li>
-</ol>
+<p><strong>1. <code>q, k, v</code> 的计算 (线性)</strong>
+这是输入 <span class="arithmatex">\(X\)</span> 和权重矩阵之间的张量缩并（矩阵乘法）。
+- <strong>Query:</strong> <span class="arithmatex">\(Q_{t_1 j} = X_{t_1 i} W^Q_{ji}\)</span>
+- <strong>Key:</strong> <span class="arithmatex">\(K_{t_2 j} = X_{t_2 k} W^K_{jk}\)</span>
+- <strong>Value:</strong> <span class="arithmatex">\(V_{t_2 j} = X_{t_2 k} W^V_{jk}\)</span></p>
+<p>（在爱因斯坦约定中，重复的索引 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(k\)</span> 表示在 <span class="arithmatex">\(d\_in\)</span> 维度上求和。）</p>
+<p><strong>2. <code>attn_scores</code> 的计算 (线性)</strong>
+<code>attn_scores = torch.matmul(q, k.T)</code>。这是一个矩阵乘法，它在 <span class="arithmatex">\(j\)</span> (即 <span class="arithmatex">\(d\_out\)</span> ) 维度上进行缩并。</p>
 <p><span class="arithmatex">\(\displaystyle S_{t_1 t_2} = Q_{t_1 j} K_{t_2 j}\)</span></p>
-<ol>
-<li><strong><code>attn_weights</code> 的计算 (非线性)</strong>
-   <code>attn_weights = torch.softmax(...)</code>。这一步是**非线性的**，不能用简单的张量缩并表示。我们将其定义为函数 <span class="arithmatex">\(A = \text{softmax}(S')\)</span> ：</li>
-</ol>
+<p><strong>3. <code>attn_weights</code> 的计算 (非线性)</strong>
+<code>attn_weights = torch.softmax(...)</code>。这一步是**非线性的**，不能用简单的张量缩并表示。我们将其定义为函数 <span class="arithmatex">\(A = \text{softmax}(S')\)</span> ：</p>
 <p><span class="arithmatex">\(\displaystyle S'_{t_1 t_2} = S_{t_1 t_2} / \sqrt{d_{out}}\)</span></p>
 <p><span class="arithmatex">\(\displaystyle A_{t_1 t_2} = \frac{\exp(S'_{t_1 t_2})}{\mathbf{1}_{t_2'} \exp(S'_{t_1 t_2'})}\)</span></p>
-<p><span class="arithmatex">\(A_{t_1 t_2}\)</span> 是最终的注意力权重矩阵。
-4. <strong><code>context_vecs</code> 的计算 (线性)</strong>
-   <code>context_vecs = torch.matmul(attn_weights, v)</code>。这是注意力权重 <span class="arithmatex">\(A\)</span> 和值 <span class="arithmatex">\(V\)</span> 之间的矩阵乘法。它在 <span class="arithmatex">\(t_2\)</span> 维度（序列）上进行缩并：</p>
+<p><span class="arithmatex">\(A_{t_1 t_2}\)</span> 是最终的注意力权重矩阵。</p>
+<p><strong>4. <code>context_vecs</code> 的计算 (线性)</strong>
+<code>context_vecs = torch.matmul(attn_weights, v)</code>。这是注意力权重 <span class="arithmatex">\(A\)</span> 和值 <span class="arithmatex">\(V\)</span> 之间的矩阵乘法。它在 <span class="arithmatex">\(t_2\)</span> 维度（序列）上进行缩并：</p>
 <p><span class="arithmatex">\(\displaystyle Y_{t_1 j} = A_{t_1 t_2} V_{t_2 j}\)</span></p>
 <hr />
 <p><strong>总结：组合的张量形式</strong>
 我们可以把这些步骤代入，得到一个更完整的（但分步的）张量表示：</p>
-<ol>
-<li>计算分数 (Scores):</li>
-</ol>
+<p><strong>1. 计算分数 (Scores):</strong></p>
 <p><span class="arithmatex">\(\displaystyle S_{t_1 t_2} = (X_{t_1 i} W^Q_{ji}) (X_{t_2 k} W^K_{jk})\)</span></p>
-<ol>
-<li>应用非线性 (Softmax):</li>
-</ol>
+<p><strong>2. 应用非线性 (Softmax):</strong></p>
 <p><span class="arithmatex">\(\displaystyle A_{t_1 t_2} = \text{softmax}\left( \frac{S_{t_1 t_2}}{\sqrt{d_{out}}} \right)\)</span></p>
-<ol>
-<li>计算上下文 (Context):</li>
-</ol>
+<p><strong>3. 计算上下文 (Context):</strong></p>
 <p><span class="arithmatex">\(\displaystyle Y_{t_1 j} = A_{t_1 t_2} (X_{t_2 k} W^V_{jk})\)</span></p>
 <p>最终的输出 <span class="arithmatex">\(Y_{t_1 j}\)</span> 是**所有 <span class="arithmatex">\(t_2\)</span> 位置的值**（经过 <span class="arithmatex">\(W^V\)</span> 变换后）的**动态加权和**，权重 <span class="arithmatex">\(A_{t_1 t_2}\)</span> 是根据查询和键（ <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(W^Q, W^K\)</span> ）动态计算出来的。</p>
 <h2 id="_4">梯度推导<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -910,19 +900,15 @@
 <hr />
 <h4 id="_6">最终梯度总结<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>以下是损失 <span class="arithmatex">\(L\)</span> 对三个权重矩阵的完整梯度，其中 <span class="arithmatex">\(G^S\)</span> 已被明确推导。</p>
-<ol>
-<li>Value 权重梯度 ( <span class="arithmatex">\(W^V\)</span> ):</li>
-</ol>
+<p><strong>1. Value 权重梯度 ( <span class="arithmatex">\(W^V\)</span> ):</strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial L}{\partial W^V_{jk}} = \left( \frac{\partial L}{\partial Y_{t_1 j}} A_{t_1 t_2} \right) X_{t_2 k}\)</span></p>
 <blockquote>
 <p>公式解释：Value 权重梯度是误差信号和注意力权重在 <span class="arithmatex">\(t_{1}\)</span> 上的内积，也就是计算Value在查询token维度上对误差信号有多大贡献，即分配给Value的误差。然后再和输入嵌入在 <span class="arithmatex">\(t_{2}\)</span> 上的内积，计算此时被 <span class="arithmatex">\(X_{t_{2}k}\)</span> 激活的信号。</p>
 </blockquote>
-<ol>
-<li>Query 权重梯度 ( <span class="arithmatex">\(W^Q\)</span> ):</li>
-</ol>
+<p><strong>2. Query 权重梯度 ( <span class="arithmatex">\(W^Q\)</span> ):</strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial L}{\partial W^Q_{ji}} = \left( \frac{\partial L}{\partial S_{t_1 t_2}} K_{t_2 j} \right) X_{t_1 i}\)</span></p>
-<p>公式解释：
-2. Key 权重梯度 ( <span class="arithmatex">\(W^K\)</span> ):</p>
+<p>公式解释：</p>
+<p><strong>3. Key 权重梯度 ( <span class="arithmatex">\(W^K\)</span> ):</strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial L}{\partial W^K_{jk}} = \left( \frac{\partial L}{\partial S_{t_1 t_2}} Q_{t_1 j} \right) X_{t_2 k}\)</span></p>
 <p>其中，关键的中间梯度 <span class="arithmatex">\(\frac{\partial L}{\partial S_{t_1 t_2}}\)</span> (即 <span class="arithmatex">\(G^S\)</span> ) 定义为：</p>
 <div class="arithmatex">\[\frac{\partial L}{\partial S_{t_1 t_2}} = \frac{A_{t_1 t_2}}{\sqrt{d_{out}}} \left( \frac{\partial L}{\partial A_{t_1 t_2}} - \sum_{t_2'} \frac{\partial L}{\partial A_{t_1 t_2'}} A_{t_1 t_2'} \right)\]</div>

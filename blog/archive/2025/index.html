@@ -675,59 +675,43 @@
 </span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pred_probab</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></code></pre></div>
 <h3 id="_2"><a class="toclink" href="../../2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_2">神经网络的结构</a></h3>
-<ol>
-<li><code>nn.Flatten()</code>
-   这个函数将输入张量的各维度展平成一个向量。默认从索引1开始到索引-1结束，要注意的是索引是从0开始的，所以索引1其实是指的第2个。
-   这里的输入X维度为 <span class="arithmatex">\([1,28,28]\)</span> ，经过<code>nn.Flatten()</code>后应该是 <span class="arithmatex">\([1,28*28]\)</span> 。
-   从张量角度看，</li>
-</ol>
+<p><strong>1. <code>nn.Flatten()</code></strong>
+这个函数将输入张量的各维度展平成一个向量。默认从索引1开始到索引-1结束，要注意的是索引是从0开始的，所以索引1其实是指的第2个。
+这里的输入X维度为 <span class="arithmatex">\([1,28,28]\)</span> ，经过<code>nn.Flatten()</code>后应该是 <span class="arithmatex">\([1,28*28]\)</span> 。
+从张量角度看，</p>
 <p><span class="arithmatex">\(\displaystyle x_{b1ij}=x_{bn}, \quad n=0*28*28+i*28+j\)</span></p>
+<p><strong>2. <code>linear_relu_stack</code></strong>
+这个函数将一系列的神经层排成一个列表，数据将从这些层中流出。过程中会改变维度。</p>
 <ol>
-<li>
-<p><code>linear_relu_stack</code>
-   这个函数将一系列的神经层排成一个列表，数据将从这些层中流出。过程中会改变维度。</p>
-</li>
-<li>
-<p><code>Linear(28*28, 512)</code>
-张量表示: <span class="arithmatex">\(y_{bm}=x_{bn}w_{nm}+\mathbf{1}_{b}b_{m}\)</span></p>
-</li>
+<li><code>Linear(28*28, 512)</code>
+   张量表示: <span class="arithmatex">\(y_{bm}=x_{bn}w_{nm}+\mathbf{1}_{b}b_{m}\)</span></li>
 <li><code>ReLU</code>
-张量表示: <span class="arithmatex">\(y_{bm}^{r}=\text{ReLU}(y_{bm})\)</span></li>
+   张量表示: <span class="arithmatex">\(y_{bm}^{r}=\text{ReLU}(y_{bm})\)</span></li>
 <li><code>Linear(512,512)</code>
-张量表示: <span class="arithmatex">\(y_{bm'}'=y_{bm}^{r}w_{mm'}+\mathbf{1}_{b}b_{m'}\)</span></li>
+   张量表示: <span class="arithmatex">\(y_{bm'}'=y_{bm}^{r}w_{mm'}+\mathbf{1}_{b}b_{m'}\)</span></li>
 <li><code>ReLU</code>
-张量表示: <span class="arithmatex">\(y_{bm'}^{r}=\text{ReLU}(y_{bm'})\)</span></li>
+   张量表示: <span class="arithmatex">\(y_{bm'}^{r}=\text{ReLU}(y_{bm'})\)</span></li>
 <li><code>Linear(512,10)</code>
-张量表示: <span class="arithmatex">\(y_{bo}=y_{bm'}^{r}w_{m'o}+\mathbf{1}_{b}b_{o}\)</span></li>
-<li><code>Softmax(dim=1)</code>
-   张量表示：</li>
+   张量表示: <span class="arithmatex">\(y_{bo}=y_{bm'}^{r}w_{m'o}+\mathbf{1}_{b}b_{o}\)</span></li>
 </ol>
+<p><strong>3. <code>Softmax(dim=1)</code></strong>
+张量表示：</p>
 <p><span class="arithmatex">\(\displaystyle s_{bi}= \frac{e^{x_{bi}}}{\mathbf{1}_{kj}e^{x_{kj}}}\)</span></p>
-<ol>
-<li>交叉熵损失</li>
-</ol>
+<p><strong>4. 交叉熵损失</strong></p>
 <p><span class="arithmatex">\(\displaystyle c_{b}=-\log{s_{b\text{T}}}\)</span></p>
 <p>交叉熵损失是单分类损失函数，这里的 <span class="arithmatex">\(\text{T}\)</span> 是代表真实标签的常量索引，这里的 <span class="arithmatex">\(\text{T}\)</span> 不是一种哑指标。</p>
 <h3 id="_3"><a class="toclink" href="../../2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_3">推导梯度</a></h3>
 <h4 id="_4"><a class="toclink" href="../../2025/11/17/mlp%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_4">交叉熵部分梯度</a></h4>
 <p>重点是利用反向传播，也就是由终点向起点一层层推。</p>
-<ol>
-<li><span class="arithmatex">\(c_{b}\)</span></li>
-</ol>
+<p><strong>1. <span class="arithmatex">\(c_{b}\)</span></strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial c_{b}}{\partial s_{ki}}=-\frac{\partial \log s_{b\text{T}}}{\partial s_{ki}} =-\frac{1}{s_{k\text{T}}}\delta_{i\text{T}}\)</span></p>
-<ol>
-<li><span class="arithmatex">\(s_{bi}\)</span></li>
-</ol>
+<p><strong>2. <span class="arithmatex">\(s_{bi}\)</span></strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial s_{bi}}{\partial y_{ko}} =\frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}}\)</span></p>
 <p>令 <span class="arithmatex">\(\sigma=\mathbf{1}_{kj}e^{x_{kj}}\)</span> ,</p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial \mathbf{1}_{kj}e^{x_{kj}}}{\partial y_{ko}} =\frac{\partial\sigma}{\partial y_{ko}} =\frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}})\)</span></p>
-<ol>
-<li><span class="arithmatex">\(\frac{\partial e^{y_{bi}}}{\partial y_{ko}}\)</span></li>
-</ol>
+<p><strong>2.1 <span class="arithmatex">\(\frac{\partial e^{y_{bi}}}{\partial y_{ko}}\)</span></strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial e^{y_{bi}}}{\partial y_{ko}} =e^{y_{bi}}\frac{\partial y_{bi}}{\partial y_{ko}} =e^{y_{bi}}\delta_{bk}\delta_{io}\)</span></p>
-<ol>
-<li><span class="arithmatex">\(\frac{\partial \sigma}{\partial y_{ko}}\)</span></li>
-</ol>
+<p><strong>2.2 <span class="arithmatex">\(\frac{\partial \sigma}{\partial y_{ko}}\)</span></strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial \sigma}{\partial y_{ko}}=\frac{\partial \mathbf{1}_{bj}e^{y_{bj}}}{\partial y_{ko}} =\mathbf{1}_{bj}e^{y_{bj}}\delta_{bk}\delta_{jo}=\mathbf{1}_{ko}e^{y_{ko}} =e^{y_{ko}}\)</span></p>
 <p>代入原式：</p>
 <p><span class="arithmatex">\(\displaystyle \frac{1}{\sigma^2}( \frac{\partial e^{y_{bi}}}{\partial y_{ko}}\sigma-e^{y_{bi}}\frac{\partial \sigma}{\partial y_{ko}}) =\frac{1}{\sigma^2}( e^{y_{bi}}\delta_{bk}\delta_{io}\sigma-e^{y_{bi}}e^{y_{ko}}) =s_{bi}\delta_{bk}\delta_{io}-s_{bi}s_{ko}\)</span></p>
@@ -753,18 +737,14 @@ y_{ij}=x_{ik}c_{kj}+\mathbf{1}_{i}b_{j}
 \]</div>
 <p>上式中， <span class="arithmatex">\(k\)</span> 重复出现代表做了乘积，同时在等式左侧未出现，就还做了求和。 <span class="arithmatex">\(\mathbf{1}_{i}\)</span> 用于将 <span class="arithmatex">\(b_{j}\)</span> 广播成矩阵。</p>
 <p>根据 <a href="https://robotchinwag.com/posts/linear-layer-deriving-the-gradient-for-the-backward-pass/">Linear Layer, Deriving the Gradient for the Backward Pass</a> 的结果，我们有如下结论：</p>
-<ol>
-<li>对 <span class="arithmatex">\(X\)</span> 的梯度</li>
-</ol>
+<p><strong>1. 对 <span class="arithmatex">\(X\)</span> 的梯度</strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial x_{pq}}=\delta_{ip}c_{qj}\)</span></p>
 <div class="arithmatex">\[\begin{aligned}
 \frac{\partial l}{\partial x_{pq}} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial x_{pq}} \\
  &amp; =\frac{\partial l}{\partial y_{ij}}\delta_{ip}c_{qj} \\
  &amp; =\frac{\partial l}{\partial y_{pj}}c_{qj}
 \end{aligned}\]</div>
-<ol>
-<li>对 <span class="arithmatex">\(A\)</span> 的梯度</li>
-</ol>
+<p><strong>2. 对 <span class="arithmatex">\(A\)</span> 的梯度</strong></p>
 <div class="arithmatex">\[\begin{aligned}
     \frac{\partial y_{ij}}{\partial a_{pq}} &amp; =\frac{\partial}{\partial a_{pq}}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\
      &amp; =x_{ik}\frac{\partial c_{kj}}{\partial a_{pq}}
@@ -780,9 +760,7 @@ y_{ij}=x_{ik}c_{kj}+\mathbf{1}_{i}b_{j}
      &amp; =\frac{\partial l}{\partial y_{ij}}x_{iq}\delta_{jp} \\
      &amp; =\frac{\partial l}{\partial y_{ip}}x_{iq}
     \end{aligned}\]</div>
-<ol>
-<li>对 <span class="arithmatex">\(b\)</span> 的梯度</li>
-</ol>
+<p><strong>3. 对 <span class="arithmatex">\(b\)</span> 的梯度</strong></p>
 <p><span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial y_{ij}}{\partial b_p} &amp; =\frac{\partial}{\partial b_p}[x_{ik}c_{kj}+\mathbf{1}_ib_j] \\ &amp; =\frac{\partial\left(\mathbf{1}_ib_j\right)}{\partial b_p} \\ &amp; =1_i\frac{\partial b_j}{\partial b_p} \end{aligned}\)</span></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial y_{ij}}{\partial b_p}=\mathbf{1}_i\delta_{jp}\)</span></p>
 <p><span class="arithmatex">\(\displaystyle \begin{aligned} \frac{\partial l}{\partial b_p} &amp; =\frac{\partial l}{\partial y_{ij}}\frac{\partial y_{ij}}{\partial b_p} \\ &amp; =\frac{\partial l}{\partial y_{ij}}\mathbf{1}_i\delta_{jp} \\ &amp; =\frac{\partial l}{\partial y_{ip}}\mathbf{1}_i \end{aligned}\)</span></p>
@@ -1067,41 +1045,31 @@ y_i=C_{ijl}v_lw_j
 <li><strong>Output <span class="arithmatex">\(Y\)</span> :</strong> <span class="arithmatex">\(Y_{t_1 j}\)</span> (对应 <code>context_vecs</code>)</li>
 </ul>
 <hr />
-<ol>
-<li><strong><code>q, k, v</code> 的计算 (线性)</strong>
-   这是输入 <span class="arithmatex">\(X\)</span> 和权重矩阵之间的张量缩并（矩阵乘法）。</li>
-<li><strong>Query:</strong> <span class="arithmatex">\(Q_{t_1 j} = X_{t_1 i} W^Q_{ji}\)</span></li>
-<li><strong>Key:</strong> <span class="arithmatex">\(K_{t_2 j} = X_{t_2 k} W^K_{jk}\)</span></li>
-<li><strong>Value:</strong> <span class="arithmatex">\(V_{t_2 j} = X_{t_2 k} W^V_{jk}\)</span>
-（在爱因斯坦约定中，重复的索引 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(k\)</span> 表示在 <span class="arithmatex">\(d\_in\)</span> 维度上求和。）</li>
-<li><strong><code>attn_scores</code> 的计算 (线性)</strong>
-   <code>attn_scores = torch.matmul(q, k.T)</code>。这是一个矩阵乘法，它在 <span class="arithmatex">\(j\)</span> (即 <span class="arithmatex">\(d\_out\)</span> ) 维度上进行缩并。</li>
-</ol>
+<p><strong>1. <code>q, k, v</code> 的计算 (线性)</strong>
+这是输入 <span class="arithmatex">\(X\)</span> 和权重矩阵之间的张量缩并（矩阵乘法）。
+- <strong>Query:</strong> <span class="arithmatex">\(Q_{t_1 j} = X_{t_1 i} W^Q_{ji}\)</span>
+- <strong>Key:</strong> <span class="arithmatex">\(K_{t_2 j} = X_{t_2 k} W^K_{jk}\)</span>
+- <strong>Value:</strong> <span class="arithmatex">\(V_{t_2 j} = X_{t_2 k} W^V_{jk}\)</span></p>
+<p>（在爱因斯坦约定中，重复的索引 <span class="arithmatex">\(i\)</span> 和 <span class="arithmatex">\(k\)</span> 表示在 <span class="arithmatex">\(d\_in\)</span> 维度上求和。）</p>
+<p><strong>2. <code>attn_scores</code> 的计算 (线性)</strong>
+<code>attn_scores = torch.matmul(q, k.T)</code>。这是一个矩阵乘法，它在 <span class="arithmatex">\(j\)</span> (即 <span class="arithmatex">\(d\_out\)</span> ) 维度上进行缩并。</p>
 <p><span class="arithmatex">\(\displaystyle S_{t_1 t_2} = Q_{t_1 j} K_{t_2 j}\)</span></p>
-<ol>
-<li><strong><code>attn_weights</code> 的计算 (非线性)</strong>
-   <code>attn_weights = torch.softmax(...)</code>。这一步是**非线性的**，不能用简单的张量缩并表示。我们将其定义为函数 <span class="arithmatex">\(A = \text{softmax}(S')\)</span> ：</li>
-</ol>
+<p><strong>3. <code>attn_weights</code> 的计算 (非线性)</strong>
+<code>attn_weights = torch.softmax(...)</code>。这一步是**非线性的**，不能用简单的张量缩并表示。我们将其定义为函数 <span class="arithmatex">\(A = \text{softmax}(S')\)</span> ：</p>
 <p><span class="arithmatex">\(\displaystyle S'_{t_1 t_2} = S_{t_1 t_2} / \sqrt{d_{out}}\)</span></p>
 <p><span class="arithmatex">\(\displaystyle A_{t_1 t_2} = \frac{\exp(S'_{t_1 t_2})}{\mathbf{1}_{t_2'} \exp(S'_{t_1 t_2'})}\)</span></p>
-<p><span class="arithmatex">\(A_{t_1 t_2}\)</span> 是最终的注意力权重矩阵。
-4. <strong><code>context_vecs</code> 的计算 (线性)</strong>
-   <code>context_vecs = torch.matmul(attn_weights, v)</code>。这是注意力权重 <span class="arithmatex">\(A\)</span> 和值 <span class="arithmatex">\(V\)</span> 之间的矩阵乘法。它在 <span class="arithmatex">\(t_2\)</span> 维度（序列）上进行缩并：</p>
+<p><span class="arithmatex">\(A_{t_1 t_2}\)</span> 是最终的注意力权重矩阵。</p>
+<p><strong>4. <code>context_vecs</code> 的计算 (线性)</strong>
+<code>context_vecs = torch.matmul(attn_weights, v)</code>。这是注意力权重 <span class="arithmatex">\(A\)</span> 和值 <span class="arithmatex">\(V\)</span> 之间的矩阵乘法。它在 <span class="arithmatex">\(t_2\)</span> 维度（序列）上进行缩并：</p>
 <p><span class="arithmatex">\(\displaystyle Y_{t_1 j} = A_{t_1 t_2} V_{t_2 j}\)</span></p>
 <hr />
 <p><strong>总结：组合的张量形式</strong>
 我们可以把这些步骤代入，得到一个更完整的（但分步的）张量表示：</p>
-<ol>
-<li>计算分数 (Scores):</li>
-</ol>
+<p><strong>1. 计算分数 (Scores):</strong></p>
 <p><span class="arithmatex">\(\displaystyle S_{t_1 t_2} = (X_{t_1 i} W^Q_{ji}) (X_{t_2 k} W^K_{jk})\)</span></p>
-<ol>
-<li>应用非线性 (Softmax):</li>
-</ol>
+<p><strong>2. 应用非线性 (Softmax):</strong></p>
 <p><span class="arithmatex">\(\displaystyle A_{t_1 t_2} = \text{softmax}\left( \frac{S_{t_1 t_2}}{\sqrt{d_{out}}} \right)\)</span></p>
-<ol>
-<li>计算上下文 (Context):</li>
-</ol>
+<p><strong>3. 计算上下文 (Context):</strong></p>
 <p><span class="arithmatex">\(\displaystyle Y_{t_1 j} = A_{t_1 t_2} (X_{t_2 k} W^V_{jk})\)</span></p>
 <p>最终的输出 <span class="arithmatex">\(Y_{t_1 j}\)</span> 是**所有 <span class="arithmatex">\(t_2\)</span> 位置的值**（经过 <span class="arithmatex">\(W^V\)</span> 变换后）的**动态加权和**，权重 <span class="arithmatex">\(A_{t_1 t_2}\)</span> 是根据查询和键（ <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(W^Q, W^K\)</span> ）动态计算出来的。</p>
 <h3 id="_4"><a class="toclink" href="../../2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_4">梯度推导</a></h3>
@@ -1264,19 +1232,15 @@ y_i=C_{ijl}v_lw_j
 <hr />
 <h5 id="_6"><a class="toclink" href="../../2025/11/16/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%A0%E9%87%8F%E8%A1%A8%E7%A4%BA%E5%8F%8A%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/#_6">最终梯度总结</a></h5>
 <p>以下是损失 <span class="arithmatex">\(L\)</span> 对三个权重矩阵的完整梯度，其中 <span class="arithmatex">\(G^S\)</span> 已被明确推导。</p>
-<ol>
-<li>Value 权重梯度 ( <span class="arithmatex">\(W^V\)</span> ):</li>
-</ol>
+<p><strong>1. Value 权重梯度 ( <span class="arithmatex">\(W^V\)</span> ):</strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial L}{\partial W^V_{jk}} = \left( \frac{\partial L}{\partial Y_{t_1 j}} A_{t_1 t_2} \right) X_{t_2 k}\)</span></p>
 <blockquote>
 <p>公式解释：Value 权重梯度是误差信号和注意力权重在 <span class="arithmatex">\(t_{1}\)</span> 上的内积，也就是计算Value在查询token维度上对误差信号有多大贡献，即分配给Value的误差。然后再和输入嵌入在 <span class="arithmatex">\(t_{2}\)</span> 上的内积，计算此时被 <span class="arithmatex">\(X_{t_{2}k}\)</span> 激活的信号。</p>
 </blockquote>
-<ol>
-<li>Query 权重梯度 ( <span class="arithmatex">\(W^Q\)</span> ):</li>
-</ol>
+<p><strong>2. Query 权重梯度 ( <span class="arithmatex">\(W^Q\)</span> ):</strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial L}{\partial W^Q_{ji}} = \left( \frac{\partial L}{\partial S_{t_1 t_2}} K_{t_2 j} \right) X_{t_1 i}\)</span></p>
-<p>公式解释：
-2. Key 权重梯度 ( <span class="arithmatex">\(W^K\)</span> ):</p>
+<p>公式解释：</p>
+<p><strong>3. Key 权重梯度 ( <span class="arithmatex">\(W^K\)</span> ):</strong></p>
 <p><span class="arithmatex">\(\displaystyle \frac{\partial L}{\partial W^K_{jk}} = \left( \frac{\partial L}{\partial S_{t_1 t_2}} Q_{t_1 j} \right) X_{t_2 k}\)</span></p>
 <p>其中，关键的中间梯度 <span class="arithmatex">\(\frac{\partial L}{\partial S_{t_1 t_2}}\)</span> (即 <span class="arithmatex">\(G^S\)</span> ) 定义为：</p>
 <div class="arithmatex">\[\frac{\partial L}{\partial S_{t_1 t_2}} = \frac{A_{t_1 t_2}}{\sqrt{d_{out}}} \left( \frac{\partial L}{\partial A_{t_1 t_2}} - \sum_{t_2'} \frac{\partial L}{\partial A_{t_1 t_2'}} A_{t_1 t_2'} \right)\]</div>
