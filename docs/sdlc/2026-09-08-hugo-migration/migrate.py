@@ -246,6 +246,21 @@ def convert_article(clone: Path, slug: str, dates: dict, posts_dir: Path, assets
                 if flat != content.strip():
                     flatten_count += 1
                 new = "$\\displaystyle " + flat + "$"
+                # 公式行前后补空行使其独立成段：CSS「纯公式段落居中」规则
+                # （p:has(> span.arithmatex:only-child)）依赖段独立性；与文字
+                # 同段时公式仍与文字挤同行。行内公式是纯文本，空行只影响
+                # 分段，无 raw HTML 的解析风险。
+                lines = md.split("\n")
+                hit = [i for i, l in enumerate(lines) if tok in l]
+                assert len(hit) == 1 and lines[hit[0]].strip() == tok, \
+                    f"{slug}: li 公式 token 不独占一行: {tok}"
+                i2 = hit[0]
+                if i2 > 0 and lines[i2 - 1].strip():
+                    lines.insert(i2, "")
+                    i2 += 1
+                if i2 + 1 < len(lines) and lines[i2 + 1].strip():
+                    lines.insert(i2 + 1, "")
+                md = "\n".join(lines)
             else:
                 new = formula
                 idx = md.find(tok)

@@ -1,0 +1,28 @@
+/* 公式排版微调（2026-09-08 公式排版优化）：
+   迁移文章的列表内公式是行内 $\displaystyle$ 形态（arithmatex 块通道不进
+   列表的实测约束），靠这里的段落级规则实现「居中独占行」的观感。 */
+
+/* 只含一个行内公式的段落（列表内公式行独占段落）：居中 + 上下留白 */
+.md-typeset p:has(> span.arithmatex:only-child) {
+  text-align: center;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+/* 居中块公式：上下留白（MathJax 注入的默认 margin 1em 略紧）；超宽时宽度
+   不被容器钳制（fit-content 会被钳住、公式左端滚不到） */
+.md-typeset div.arithmatex > mjx-container[display="true"] {
+  margin: 1.2em auto;
+  width: max-content;
+}
+
+/* 行内公式与文字的横向间隙 */
+.md-typeset span.arithmatex {
+  padding: 0 0.15em;
+}
+
+/* 超宽块公式横向滚动（放在外层容器，不碰行内公式） */
+.md-typeset div.arithmatex {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
